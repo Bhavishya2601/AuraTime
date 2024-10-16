@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .clip-tilted-footer {
+      clip-path: polygon(
+        0 20%,
+        100% 0%,
+        100% 100%,
+        0 100%
+      );
+    }
+  }
