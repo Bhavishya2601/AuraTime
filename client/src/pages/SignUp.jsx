@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import toast, { Toaster } from 'react-hot-toast'
+
 
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false)
@@ -11,6 +13,8 @@ const SignUp = () => {
     email: '',
     password: ''
   })
+
+  const navigate = useNavigate()
 
   const handleInputChange = (e) =>{
     setFormData({
@@ -23,9 +27,18 @@ const SignUp = () => {
     e.preventDefault()
     try{
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signup`, formData)
-      // after submittion things are pending
+      
+      if (response.data.success || response.status == 201){
+        
+        // set cookies over here
+        toast.success('Account Created')
+        setTimeout(()=>{
+          navigate('/dashboard')
+        }, 2000)
+      }
     } catch (err){
       console.log(err.message)
+      toast.error('Something Went Wrong!!')
     }
   }
 
@@ -37,6 +50,7 @@ const SignUp = () => {
   return (
     <>
     <form onSubmit={handleSubmit}>
+      <Toaster />
       <div className='flex flex-col justify-center mx-auto gap-3 items-center py-10'>
         <div className="text-xl font-bold uppercase">Create New Account</div>
         <div className='w-1/3'>
