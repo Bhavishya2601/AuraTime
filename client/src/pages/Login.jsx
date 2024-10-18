@@ -34,7 +34,7 @@ const Login = () => {
   }
 
   const PasswordVisibility = () =>{
-
+    // implement password visiblity
   }
 
   return (
@@ -80,7 +80,7 @@ const Login = () => {
           <input type="submit" className='bg-blue-400 w-full py-1 rounded-lg'/>
         </div>
       <div>
-        <Link to={'/login'}>Already have a Account?</Link>
+      <Link to={'/signup'}>New User? Create Account</Link>
       </div>
       </div>
       </form>
