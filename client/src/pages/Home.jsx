@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom'
-
-import Footer from '../components/Footer'
+import { Link } from 'react-router-dom' 
 
 const Home = () => {
   return (
@@ -9,7 +7,6 @@ const Home = () => {
       Home <br /><br />
       <Link to={'/login'}>Get Started</Link>
     </div>
-    <Footer />
     </>
   )
 }

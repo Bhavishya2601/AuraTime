@@ -5,6 +5,8 @@ import { db } from '../index.js'
 import bcrypt from 'bcrypt'
 import nodemailer from 'nodemailer'
 
+import { otpTemplate } from '../mailTemplates/otpVerificationTemplate.js'
+
 const saltRounds = parseInt(process.env.SALT_ROUNDS)
 
 const expiryTime = 10 * 60 * 1000;
@@ -33,7 +35,7 @@ const User = {
                 password VARCHAR(200) NOT NULL
                 );
         `)
-        const { email } = userData
+        const { email, fName, lName } = userData
 
 
         let result = await db.query('SELECT * FROM users_account WHERE email=$1', [email])
@@ -48,12 +50,13 @@ const User = {
 
             otpStore[email] = { otp, generateAt }
 
+            const htmlContent = otpTemplate(otp, `${fName} ${lName}`)
 
             const mailOptions = {
                 from: process.env.EMAIL_PASS,
                 to: email,
-                subject: 'Your OTP',
-                text: `Your OTP is ${otp}`
+                subject: 'Verify your email address for MyKart',
+                html: htmlContent
             }
 
             transporter.sendMail(mailOptions, (err, info) => {

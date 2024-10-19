@@ -38,12 +38,12 @@ const Login = () => {
   }
 
   const PasswordVisibility = () => {
-    // implement password visiblity
+    setPasswordShown((prev)=>!prev)
   }
 
   return (
     <>
-      <div className='flex justify-around my-20 mx-80 py-5 border-2 rounded-3xl font-manrope'>
+      <div className='flex justify-around mt-20 mx-80 py-5 border-2 rounded-3xl font-manrope mb-5'>
         <div className='w-1/3 flex flex-col justify-center items-end gap-4'>
           <button
             className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md w-4/5 px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200">
@@ -105,7 +105,7 @@ const Login = () => {
                   <label htmlFor="password-checked">Show Password</label>
                 </div>
                 <div>
-                  <input type="submit" className='bg-blue-700 text-white w-4/5 py-2 rounded-lg' />
+                  <input type="submit" className='bg-blue-700 text-white w-4/5 py-2 rounded-lg cursor-pointer hover:bg-blue-600' />
                 </div>
                 <div>
                   <Link to={'/signup'}>New User? <span className='text-blue-600 font-semibold'> Create Account</span></Link>
