@@ -3,9 +3,11 @@ dotenv.config()
 
 import {db} from '../index.js'
 
+import axios from 'axios'
 import express from 'express'
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth2'
+import GithubStrategy from 'passport-github2'
 import session from 'express-session';
 
 const router = express();
@@ -28,10 +30,19 @@ router.get('/google/main', passport.authenticate("google", {
     failureRedirect: `${process.env.FRONTEND_URL}/login`
 }))
 
+router.get('/github', passport.authenticate('github', {
+    scope: ['user:email']
+}))
+
+router.get('/github/main', passport.authenticate("github", {
+    successRedirect : `${process.env.FRONTEND_URL}/dashboard`,
+    failureRedirect: `${process.env.FRONTEND_URL}/login`
+}))
+
 passport.use('google', new GoogleStrategy({
     clientID : process.env.GOOGLE_CLIENT_ID,
     clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL : process.env.GOOGLE_CALLBACK,
+    callbackURL : "/auth/google/main",
 }, async (accessToken, refreshToken, profile, cb)=>{
     let {given_name: firstname, family_name: lastname, email, id} = profile
     
@@ -47,6 +58,45 @@ passport.use('google', new GoogleStrategy({
     } catch (err){
         console.log('Something went wrong while logging through Google')
         cb(err);
+    }
+}))
+
+passport.use('github', new GithubStrategy({
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: '/auth/github/main'
+}, async (accessToken, refreshToken, profile, cb)=>{
+    let {displayName:name, id} = profile
+
+    // spliting name into first name and last name
+    let parts = name.split(' ')
+    let firstname = parts[0]
+    let lastname = parts.slice(1).join(" ")
+
+    try{
+        const {data: emails} = await axios.get('https://api.github.com/user/emails', {
+            headers: {Authorization: `token ${accessToken}`}
+        })
+        const email = emails.find(email => email.primary && email.verified)?.email
+        // console.log(email)
+        try{
+            let result = await db.query('SELECT * FROM users_account WHERE email=$1', [email])
+            if (result.rows.length == 0){
+                let newUser = await db.query('INSERT INTO users_account (firstname, lastname, email, password, login_method) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstname,lastname, email, id, "github"])
+                console.log("data saved in database")
+                return cb(null, newUser.rows[0])
+            } else {
+                return cb(null, result.rows[0])
+            }
+        } catch (err){
+            console.log("Error while inserting data into database")
+            console.log(err.message)
+            cb(err)
+        }
+    } catch(err) {
+        console.log(err)
+        console.log('Error while logging through github')
+        cb(err)
     }
 }))
 

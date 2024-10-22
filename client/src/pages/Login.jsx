@@ -45,6 +45,9 @@ const Login = () => {
     window.location.href = `${import.meta.env.VITE_BACKEND_URL}/auth/google`
   }
 
+  const handleGithubLogin = () =>{
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/auth/github`
+  }
 
   return (
     <>
@@ -56,9 +59,9 @@ const Login = () => {
             <img src={google} alt="google" className="h-6 w-6 mr-2" />
             <span>Continue with Google</span>
           </button>
-          <button type="button" className="py-2 px-4 flex justify-center items-center bg-gray-600 hover:bg-gray-700  text-white w-4/5 transition ease-in duration-200 text-center text-sm font-semibold shadow-md rounded-lg">
+          <button type="button" className="py-2 px-4 flex justify-center items-center bg-gray-600 hover:bg-gray-700  text-white w-4/5 transition ease-in duration-200 text-center text-sm font-semibold shadow-md rounded-lg" onClick={handleGithubLogin}>
             <img src={github} alt="github" className="h-6 w-6 mr-2" />
-            Sign in with GitHub
+            Continue with GitHub
           </button>
           <button
             className="flex items-center border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-white hover:bg-gray-200 w-4/5"
