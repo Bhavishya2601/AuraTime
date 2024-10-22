@@ -49,6 +49,10 @@ const Login = () => {
     window.location.href = `${import.meta.env.VITE_BACKEND_URL}/auth/github`
   }
 
+  const handleDiscordLogin = () =>{
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/auth/discord`
+  }
+
   return (
     <>
       <div className='flex justify-around mt-20 mx-80 py-5 border-2 rounded-3xl font-manrope mb-5'>
@@ -65,7 +69,8 @@ const Login = () => {
           </button>
           <button
             className="flex items-center border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-white hover:bg-gray-200 w-4/5"
-            style={{ backgroundColor: '#5865F2' }}>
+            style={{ backgroundColor: '#5865F2' }}
+            onClick={handleDiscordLogin}>
             <img src={discord} alt="discord" className="h-6 w-6 mr-2" />
             <span>Continue with Discord</span>
           </button>

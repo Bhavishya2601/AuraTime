@@ -6,9 +6,10 @@ import {db} from '../index.js'
 import axios from 'axios'
 import express from 'express'
 import passport from 'passport';
+import session from 'express-session';
 import GoogleStrategy from 'passport-google-oauth2'
 import GithubStrategy from 'passport-github2'
-import session from 'express-session';
+import DiscordStrategy from 'passport-discord'
 
 const router = express();
 
@@ -36,6 +37,13 @@ router.get('/github', passport.authenticate('github', {
 
 router.get('/github/main', passport.authenticate("github", {
     successRedirect : `${process.env.FRONTEND_URL}/dashboard`,
+    failureRedirect: `${process.env.FRONTEND_URL}/login`
+}))
+
+router.get('/discord', passport.authenticate('discord'))
+
+router.get('/discord/main', passport.authenticate('discord', {
+    successRedirect: `${process.env.FRONTEND_URL}/dashboard`,
     failureRedirect: `${process.env.FRONTEND_URL}/login`
 }))
 
@@ -68,7 +76,6 @@ passport.use('github', new GithubStrategy({
 }, async (accessToken, refreshToken, profile, cb)=>{
     let {displayName:name, id} = profile
 
-    // spliting name into first name and last name
     let parts = name.split(' ')
     let firstname = parts[0]
     let lastname = parts.slice(1).join(" ")
@@ -78,7 +85,6 @@ passport.use('github', new GithubStrategy({
             headers: {Authorization: `token ${accessToken}`}
         })
         const email = emails.find(email => email.primary && email.verified)?.email
-        // console.log(email)
         try{
             let result = await db.query('SELECT * FROM users_account WHERE email=$1', [email])
             if (result.rows.length == 0){
@@ -96,6 +102,31 @@ passport.use('github', new GithubStrategy({
     } catch(err) {
         console.log(err)
         console.log('Error while logging through github')
+        cb(err)
+    }
+}))
+
+passport.use('discord', new DiscordStrategy({
+    clientID: process.env.DISCORD_CLIENT_ID,
+    clientSecret: process.env.DISCORD_CLIENT_SECRET,
+    callbackURL: '/auth/discord/main',
+    scope: ['identify', 'email']
+}, async (accessToken, refreshToken, profile, cb)=>{
+    let {global_name: name, email, id} = profile
+    let parts = name.split(' ')
+    let firstname = parts[0]
+    let lastname = parts.slice(1).join(' ')
+
+    try{
+        let result = await db.query('SELECT * FROM users_account WHERE email = $1', [email]);
+        
+        if (result.rows.length == 0){
+            let newUser = await db.query('INSERT INTO users_account (firstname, lastname, email, password, login_method) VALUES ($1, $2, $3, $4, $5) RETURNING *',[firstname, lastname, email, id, "discord"]);
+            return cb(null, newUser.rows[0])
+        } else {
+            return cb(null, result.rows[0])
+        }
+    } catch (err){
         cb(err)
     }
 }))
