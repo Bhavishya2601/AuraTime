@@ -29,10 +29,11 @@ const User = {
         await db.query(`
             CREATE TABLE IF NOT EXISTS users_account (
                 id SERIAL PRIMARY KEY,
-                firstName VARCHAR(50) NOT NULL,
-                lastName VARCHAR(50) NOT NULL,
+                firstname VARCHAR(50) NOT NULL,
+                lastname VARCHAR(50) NOT NULL,
                 email VARCHAR(100) NOT NULL UNIQUE,
-                password VARCHAR(200) NOT NULL
+                password VARCHAR(200) NOT NULL,
+                login_method VARCHAR(20) NOT NULL
                 );
         `)
         const { email, fName, lName } = userData
@@ -61,8 +62,8 @@ const User = {
 
             transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {
-                    console.log('error while verifing otp')
-                    return 'error while verifing otp'
+                    console.log('error while sending otp')
+                    throw 'error while sending otp'
                 }
                 console.log('mail send')
             })
@@ -89,10 +90,11 @@ const User = {
                 try {
                     const hash = await bcrypt.hash(password, saltRounds)
 
-                    const res = await db.query('INSERT INTO users_account (firstName, lastName, email, password) VALUES($1, $2, $3, $4) RETURNING *', [fName, lName, email, hash])
+                    const res = await db.query('INSERT INTO users_account (firstname, lastname, email, password, login_method) VALUES($1, $2, $3, $4, $5) RETURNING *', [fName, lName, email, hash, "local"])
 
                     return res.rows[0]
                 } catch (err) {
+                    console.log(err)
                     console.log('Error while inserting data into database', err.message)
                 }
 

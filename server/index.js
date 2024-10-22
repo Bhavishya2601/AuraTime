@@ -6,11 +6,18 @@ import cors from 'cors'
 import pg from 'pg'
 
 import userRouter from './routes/user.js'
+import authRouter from './routes/auth.js'
 
 const app = express();
 const port = process.env.PORT
 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
+app.use(cors({
+    origin: `${process.env.FRONTEND_URL || '*'}`,
+    credentials: true
+}))
 
 const db = new pg.Client({
     user: process.env.DB_USER,
@@ -34,18 +41,11 @@ const startServer = () =>{
 
 startServer()
 
-app.use(cors({
-    origin: `${process.env.FRONTEND_URL || '*'}`,
-    credentials: true
-}))
-
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-
 app.get('/', (req, res)=>{
     res.send('Backend Started')
 })
 
 app.use('/api/v1/user', userRouter)
+app.use('/auth', authRouter)
 
 export {db}
