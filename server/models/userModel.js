@@ -40,7 +40,6 @@ const User = {
 
 
         let result = await db.query('SELECT * FROM users_account WHERE email=$1', [email])
-        let user = result.rows[0]
 
         if (result.rows.length > 0) {
             throw 'User Already Exists'
@@ -68,7 +67,7 @@ const User = {
                 console.log('mail send')
             })
 
-            return 'otp send successfully'
+            return email
         }
     },
 
@@ -107,26 +106,26 @@ const User = {
         }
     },
 
-    read: async (userData) => { // login
-        const { email, password } = userData
+    // read: async (userData) => { // login
+    //     const { email, password } = userData
 
-        let result = await db.query('SELECT * FROM users_account WHERE email=$1', [email])
-        let user = result.rows[0]
+    //     let result = await db.query('SELECT * FROM users_account WHERE email=$1', [email])
+    //     let user = result.rows[0]
 
-        if (result.rows.length > 0) {
-            const cpass = await bcrypt.compare(password, user.password);
-            if (cpass) {
-                console.log('verified')
-                return user;
-            } else {
-                console.log('Wrong password')
-                throw 'Wrong password'
-            }
-        } else {
-            console.log('User not found')
-            throw 'User not found'
-        }
-    }
+    //     if (result.rows.length > 0) {
+    //         const cpass = await bcrypt.compare(password, user.password);
+    //         if (cpass) {
+    //             console.log('verified')
+    //             return user;
+    //         } else {
+    //             console.log('Wrong password')
+    //             throw 'Wrong password'
+    //         }
+    //     } else {
+    //         console.log('User not found')
+    //         throw 'User not found'
+    //     }
+    // }
 }
 
 export default User;

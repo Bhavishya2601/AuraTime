@@ -20,6 +20,13 @@ const SignUp = () => {
 
   const navigate = useNavigate()
 
+  useEffect(()=>{
+    const token = localStorage.getItem('token');
+    if (token){
+      navigate('/dashboard')
+    }
+  }, [navigate])
+
   const PasswordVisibility = (e) => {
     setPasswordShown((prev) => !prev)
   }
@@ -76,7 +83,7 @@ const SignUp = () => {
 
     const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/verify_otp`, { ...formData, otp })
     if (result.data.success || result.status == 201) {
-      // set cookies over here
+      localStorage.setItem('token', result.data.token)
       toast.success('Account Created')
       setTimeout(() => {
         navigate('/dashboard')

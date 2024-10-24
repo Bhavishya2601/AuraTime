@@ -6,6 +6,7 @@ import Contact from './pages/Contact'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
+import Error_404 from './pages/Error_404'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -24,6 +25,7 @@ function App() {
       <Route path='/signup' element={<SignUp />} />
       <Route path='/dashboard' element={<Dashboard />} />
       {/* <Route path='/dashboard/profile' element={<Profile />} /> */}
+      <Route path='*' element={<Error_404 />} />
     </Routes>
     <Footer />
     </BrowserRouter>

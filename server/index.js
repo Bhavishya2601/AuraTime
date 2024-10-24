@@ -49,3 +49,4 @@ app.use('/api/v1/user', userRouter)
 app.use('/auth', authRouter)
 
 export {db}
+export default app;
