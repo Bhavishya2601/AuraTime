@@ -24,21 +24,18 @@ export const signup = async (req, res)=>{
     }
 }
 
-// export const login = async (req, res) =>{
-//     try{
-//         const result = await User.read(req.body)
-//         res.status(200).json(result)
-//     } catch (err){
-//         console.log(err)
-//         res.status(404).json({error: 'User doesn\'t exist or wrong password'})
-//     }
-// }
-
 export const verify_otp = async (req, res) =>{
     try{
         const result = await User.verifyOtp(req.body)
+        // console.log(result)
         const token = generateToken(result)
-        res.status(201).json({user: result, token})
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 24 * 60 * 60 * 1000,
+            sameSite: 'Lax'
+        })
+        res.status(201).json(result)
     } catch (err) {
         res.status(404).json({error: 'OTP verification failed'})
     }

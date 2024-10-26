@@ -55,7 +55,7 @@ const User = {
             const mailOptions = {
                 from: process.env.EMAIL_PASS,
                 to: email,
-                subject: 'Verify your email address for MyKart',
+                subject: 'Verify your email address for AuraTime',
                 html: htmlContent
             }
 

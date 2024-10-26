@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import React, { useState, useEffect } from 'react'
+import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useUser } from '../context/UserContext'
 
 import google from '../assets/google.svg'
 import github from '../assets/github.svg'
@@ -10,23 +11,38 @@ import discord from '../assets/discord.svg'
 const Login = () => {
   const navigate = useNavigate()
 
+  const {userData} = useUser()
+  useEffect(() => {
+  
+    if (userData!=null){
+      navigate('/dashboard')
+    } 
+  }, [userData])
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
   const [passwordShown, setPasswordShown] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/login`, formData)
-
-      toast.success('logged in')
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, formData, {
+        withCredentials: true
+      })
+      console.log(response.data)
+      
+      toast.success('Login Successful')
       setTimeout(() => {
         navigate('/dashboard')
       }, 2000)
     } catch (err) {
-      toast.error('Something Went Wrong!!')
+      setLoading(false)
+      const errorMessage = err.response?.data?.error || 'Something went Wrong!!'
+      toast.error(errorMessage)
     }
   }
 
@@ -80,7 +96,6 @@ const Login = () => {
 
         <div className='w-2/5'>
           <form onSubmit={handleSubmit}>
-            <Toaster />
             <div className='flex flex-col mx-auto gap-3 py-10'>
 
               <div>
@@ -119,7 +134,7 @@ const Login = () => {
                   <label htmlFor="password-checked">Show Password</label>
                 </div>
                 <div>
-                  <input type="submit" className='bg-blue-700 text-white w-4/5 py-2 rounded-lg cursor-pointer hover:bg-blue-600' />
+                  <input type="submit" className='bg-blue-700 text-white w-4/5 py-2 rounded-lg cursor-pointer hover:bg-blue-600' value={loading? "Logging in..." : "Login"} />
                 </div>
                 <div>
                   <Link to={'/signup'}>New User? <span className='text-blue-600 font-semibold'> Create Account</span></Link>

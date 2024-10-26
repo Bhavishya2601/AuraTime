@@ -1,44 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useUser } from '../context/UserContext'
+import toast, { Toaster } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+
 
 const Dashboard = () => {
-  const [userData, setUserData] = useState(null)
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem('token')
+  const {userData, setUserData} = useUser() 
+  const [loading, setLoading] = useState(true)
 
+  const handleLogout = async () => {
+    console.log('logging out')
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/logout`)
+    console.log(response)
+    if (response.status === 200){
+      // setUserData(null)
+      console.log('success log out')
+      toast.success('logged out successfully')
+      setTimeout(() => {
+        navigate('/')
+      }, 1500);
+    }
+  }
 
-      if (token) {
-        try {
-          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/dashboard`, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })
-          setUserData(response.data)
-        } catch (err) {
-          console.log('Error fetching Dashboard data')
-          console.log(err)
-        }
-      } else {
-        console.log('No token found')
-      }
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000);
     }
 
     fetchData()
-  }, [])
+  }, [setUserData])
 
+  if (loading){
+    return <div>loading...</div>
+  }
+  if (!userData){
+    return <div>Redirecting...</div>
+  }
+  // implement reloading after a few second
 
   return (
     <div>
-      {userData? (
         <div>
           <h1>Welcome, {userData.user.email}</h1>
+          <div onClick={handleLogout}>Logout</div>
         </div>
-      ): (
-        <p>Loading...</p>
-      )}
     </div>
   )
 }

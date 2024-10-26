@@ -54,7 +54,7 @@ export const otpTemplate = (otp, name) => {
         <h1>OTP Email Verification</h1>
       <p>Hey ${name}</p>
       
-      <p>Thank you for choosing MyKart. Use the following OTP to complete the procedure to verify your email address. OTP is valid for <strong>10 minutes</strong>. Do not share this code with others.</p>
+      <p>Thank you for choosing AuraTime. Use the following OTP to complete the procedure to verify your email address. OTP is valid for <strong>10 minutes</strong>. Do not share this code with others.</p>
       <h2>${otp}</h2>
         <p>If you have not signed up, you can safely ignore this.</p>
     </div>

@@ -4,20 +4,39 @@ dotenv.config()
 import express from "express";
 import cors from 'cors'
 import pg from 'pg'
+import cookieParser from 'cookie-parser';
 
 import userRouter from './routes/user.js'
 import authRouter from './routes/auth.js'
+// import { Cookie } from 'express-session';
 
 const app = express();
 const port = process.env.PORT
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(cookieParser())
 
 app.use(cors({
-    origin: `${process.env.FRONTEND_URL || '*'}`,
+    origin: `${process.env.FRONTEND_URL || 'http://localhost:5173'}`,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
+
+app.options('*', cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
     credentials: true
 }))
+
+// checking if any database variable is missing
+const requiredEnv = ['DB_USER', 'DB_HOST', 'DB_PASSWORD', 'DB_DATABASE', 'DB_PORT'];
+requiredEnv.forEach((env) => {
+    if (!process.env[env]) {
+        console.error(`Error: ${env} is not defined in the environment variables.`);
+        process.exit(1);
+    }
+});
 
 const db = new pg.Client({
     user: process.env.DB_USER,
@@ -36,6 +55,7 @@ const startServer = () =>{
     } catch (err){
         console.log(err.message)
         console.log("Error starting backend")
+        process.exit(1)
     }
 }
 
