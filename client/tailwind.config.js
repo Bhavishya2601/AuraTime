@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         manrope: ['Manrope', 'sans-serif'],
+        archivo: ["Archivo Black", 'sans-serif']
       },
     },
   },

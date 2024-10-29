@@ -11,12 +11,12 @@ import discord from '../assets/discord.svg'
 const Login = () => {
   const navigate = useNavigate()
 
-  const {userData} = useUser()
+  const { userData } = useUser()
   useEffect(() => {
-  
-    if (userData!=null){
+
+    if (userData != null) {
       navigate('/dashboard')
-    } 
+    }
   }, [userData])
 
   const [formData, setFormData] = useState({
@@ -34,7 +34,7 @@ const Login = () => {
         withCredentials: true
       })
       console.log(response.data)
-      
+
       toast.success('Login Successful')
       setTimeout(() => {
         navigate('/dashboard')
@@ -54,37 +54,49 @@ const Login = () => {
   }
 
   const PasswordVisibility = () => {
-    setPasswordShown((prev)=>!prev)
+    setPasswordShown((prev) => !prev)
   }
 
-  const handleGoogleLogin = () =>{
+  const handleGoogleLogin = () => {
     window.location.href = `${import.meta.env.VITE_BACKEND_URL}/auth/google`
   }
 
-  const handleGithubLogin = () =>{
+  const handleGithubLogin = () => {
     window.location.href = `${import.meta.env.VITE_BACKEND_URL}/auth/github`
   }
 
-  const handleDiscordLogin = () =>{
+  const handleDiscordLogin = () => {
     window.location.href = `${import.meta.env.VITE_BACKEND_URL}/auth/discord`
   }
 
   return (
-    <>
-      <div className='flex justify-around mt-20 mx-80 py-5 border-2 rounded-3xl font-manrope mb-5'>
-        <div className='w-1/3 flex flex-col justify-center items-end gap-4'>
+    <div className='relative h-[80vh]'>
+      <video
+        src="img/bg-video.mp4"
+        className='absolute h-full w-full object-cover filter'
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+
+      <div className='relative flex justify-between py-5 px-60 font-manrope h-full items-center text-white'>
+
+
+        <div className='w-2/5 flex flex-col justify-center items-center gap-4'>
           <button
-            className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md w-4/5 px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200"
+            className="flex justify-center items-center bg-white border border-gray-300 rounded-lg shadow-md w-3/5 px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200"
             onClick={handleGoogleLogin}>
             <img src={google} alt="google" className="h-6 w-6 mr-2" />
             <span>Continue with Google</span>
           </button>
-          <button type="button" className="py-2 px-4 flex justify-center items-center bg-gray-600 hover:bg-gray-700  text-white w-4/5 transition ease-in duration-200 text-center text-sm font-semibold shadow-md rounded-lg" onClick={handleGithubLogin}>
+          <button type="button" className="py-2 px-4 flex justify-center items-center bg-gray-600 hover:bg-gray-700  text-white w-3/5 transition ease-in duration-200 text-center text-sm font-semibold shadow-md rounded-lg" onClick={handleGithubLogin}>
             <img src={github} alt="github" className="h-6 w-6 mr-2" />
             Continue with GitHub
           </button>
           <button
-            className="flex items-center border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-white hover:bg-gray-200 w-4/5"
+            className="flex justify-center items-center rounded-lg shadow-md py-2 text-sm font-medium text-white hover:bg-gray-200 w-3/5"
             style={{ backgroundColor: '#5865F2' }}
             onClick={handleDiscordLogin}>
             <img src={discord} alt="discord" className="h-6 w-6 mr-2" />
@@ -94,10 +106,9 @@ const Login = () => {
 
         <div className='border-[1px] h-60 mt-12 border-slate-400' />
 
-        <div className='w-2/5'>
+        <div className='w-2/5 flex justify-center'>
           <form onSubmit={handleSubmit}>
-            <div className='flex flex-col mx-auto gap-3 py-10'>
-
+            <div className='flex flex-col gap-3 w-96'>
               <div>
                 <label className='flex flex-col gap-1'>
                   Email Address
@@ -106,7 +117,7 @@ const Login = () => {
                     name='email'
                     value={formData.email}
                     onChange={handleInputChange}
-                    className='outline-none px-4 py-2 rounded-lg border-2 w-4/5'
+                    className='outline-none px-4 py-2 rounded-lg border-2 '
                     required />
                 </label>
               </div>
@@ -118,7 +129,7 @@ const Login = () => {
                     name='password'
                     value={formData.password}
                     onChange={handleInputChange}
-                    className='outline-none px-4 py-2 rounded-lg border-2 w-4/5'
+                    className='outline-none px-4 py-2 rounded-lg border-2'
                     required />
                 </label>
               </div>
@@ -134,7 +145,7 @@ const Login = () => {
                   <label htmlFor="password-checked">Show Password</label>
                 </div>
                 <div>
-                  <input type="submit" className='bg-blue-700 text-white w-4/5 py-2 rounded-lg cursor-pointer hover:bg-blue-600' value={loading? "Logging in..." : "Login"} />
+                  <input type="submit" className='bg-blue-700 text-white w-full py-2 rounded-lg cursor-pointer hover:bg-blue-600' value={loading ? "Logging in..." : "Login"} />
                 </div>
                 <div>
                   <Link to={'/signup'}>New User? <span className='text-blue-600 font-semibold'> Create Account</span></Link>
@@ -144,7 +155,7 @@ const Login = () => {
           </form>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

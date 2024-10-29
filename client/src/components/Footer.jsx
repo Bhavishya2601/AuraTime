@@ -11,11 +11,11 @@ import whatsapp from '../assets/whatsapp.svg'
 
 const Footer = () => {
   return (
-    <div className='clip-tilted-footer bg-slate-900 min-h-[300px] w-full'>
-      <div className='pt-24 px-48 text-gray-400 flex flex-col gap-10 py-10'>
+    <div className='bg-black min-h-[300px] w-full'>
+      <div className='pt-12 px-48 text-gray-400 flex flex-col gap-10 py-10'>
         <div className='flex justify-between'>
           <div className='text-xl'>
-            logo
+            <img src="logo1.png" alt="AuraTime" className='h-10' />
           </div>
           <div className='flex gap-3 items-center'>
             <div>
