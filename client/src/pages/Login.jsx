@@ -70,7 +70,7 @@ const Login = () => {
   }
 
   return (
-    <div className='relative h-[80vh]'>
+    <div className='relative h-[calc(100vh-70px)]'>
       <video
         src="img/bg-video.mp4"
         className='absolute h-full w-full object-cover filter'
@@ -79,59 +79,60 @@ const Login = () => {
         loop
         playsInline
       />
-        <div className="absolute inset-0 bg-black opacity-60"></div>
+      <div className="absolute inset-0 bg-black opacity-60"></div>
 
       <div className='relative flex justify-between py-5 px-60 font-manrope h-full items-center text-white'>
 
 
-        <div className='w-2/5 flex flex-col justify-center items-center gap-4'>
+        <div className='w-1/3 flex flex-col justify-center items-center gap-4'>
           <button
-            className="flex justify-center items-center bg-white border border-gray-300 rounded-lg shadow-md w-3/5 px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200"
+            className="flex justify-center items-center bg-transparent border-white border-2 shadow-md w-[70%] px-6 py-2 text-sm font-medium text-white hover:bg-[#f7f7f733]"
             onClick={handleGoogleLogin}>
             <img src={google} alt="google" className="h-6 w-6 mr-2" />
             <span>Continue with Google</span>
           </button>
-          <button type="button" className="py-2 px-4 flex justify-center items-center bg-gray-600 hover:bg-gray-700  text-white w-3/5 transition ease-in duration-200 text-center text-sm font-semibold shadow-md rounded-lg" onClick={handleGithubLogin}>
+          <button type="button" className="py-2 px-4 flex justify-center items-center bg-transparent border-2 border-white hover:bg-[#f7f7f733]  text-white w-[70%] transition ease-in duration-300 text-center text-sm font-semibold" onClick={handleGithubLogin}>
             <img src={github} alt="github" className="h-6 w-6 mr-2" />
             Continue with GitHub
           </button>
           <button
-            className="flex justify-center items-center rounded-lg shadow-md py-2 text-sm font-medium text-white hover:bg-gray-200 w-3/5"
-            style={{ backgroundColor: '#5865F2' }}
+            className="flex justify-center items-center py-2 text-sm bg-transparent border-2 border-white font-medium text-white hover:bg-[#f7f7f733] w-[70%]"
             onClick={handleDiscordLogin}>
             <img src={discord} alt="discord" className="h-6 w-6 mr-2" />
             <span>Continue with Discord</span>
           </button>
         </div>
 
-        <div className='border-[1px] h-60 mt-12 border-slate-400' />
+        <div className='flex flex-col items-center gap-2'>
+          <div className='h-20 w-[1px] bg-white'></div>
+          <div>OR</div>
+          <div className='h-20 w-[1px] bg-white'></div>
+        </div>
 
         <div className='w-2/5 flex justify-center'>
           <form onSubmit={handleSubmit}>
-            <div className='flex flex-col gap-3 w-96'>
-              <div>
-                <label className='flex flex-col gap-1'>
-                  Email Address
+            <div className='flex flex-col gap-5 w-96'>
+              <div className='flex flex-col gap-3'>
+                <div>
                   <input
                     type="email"
                     name='email'
                     value={formData.email}
                     onChange={handleInputChange}
-                    className='outline-none px-4 py-2 rounded-lg border-2 '
+                    className='outline-none px-4 py-2 border-2 border-white bg-transparent w-full'
+                    placeholder='Email Address'
                     required />
-                </label>
-              </div>
-              <div>
-                <label className='flex flex-col gap-1'>
-                  Password
+                </div>
+                <div>
                   <input
                     type={passwordShown ? 'text' : 'password'}
                     name='password'
                     value={formData.password}
                     onChange={handleInputChange}
-                    className='outline-none px-4 py-2 rounded-lg border-2'
+                    className='outline-none px-4 py-2 border-2 border-white bg-transparent w-full'
+                    placeholder='Password'
                     required />
-                </label>
+                </div>
               </div>
               <div className='flex flex-col gap-1'>
                 <div className='items-center flex gap-1'>
@@ -140,15 +141,15 @@ const Login = () => {
                     checked={passwordShown}
                     onChange={PasswordVisibility}
                     id="password-checked"
-                    className='h-4 w-4'
+                    className='h-4 w-4 accent-black checked:ring-1 checked:ring-white'
                   />
                   <label htmlFor="password-checked">Show Password</label>
                 </div>
                 <div>
-                  <input type="submit" className='bg-blue-700 text-white w-full py-2 rounded-lg cursor-pointer hover:bg-blue-600' value={loading ? "Logging in..." : "Login"} />
+                  <input type="submit" className='bg-[#f7f7f733] border-2 border-white text-white w-full py-2 cursor-pointer font-bold hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' value={loading ? "Logging in..." : "LOGIN"} />
                 </div>
                 <div>
-                  <Link to={'/signup'}>New User? <span className='text-blue-600 font-semibold'> Create Account</span></Link>
+                  <Link to={'/signup'}>New User? <span className=' font-bold'> Create Account</span></Link>
                 </div>
               </div>
             </div>

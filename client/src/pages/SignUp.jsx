@@ -38,7 +38,7 @@ const SignUp = () => {
         setCountdown((prev) => {
           if (prev === 1) {
             clearInterval(timer)
-            setIsDisabled(false) 
+            setIsDisabled(false)
           }
           return prev - 1
         })
@@ -95,61 +95,63 @@ const SignUp = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <Toaster />
-        <div className='flex flex-col justify-center mx-60 gap-3 items-center py-10 font-manrope'>
-          <div className="text-2xl font-bold uppercase">Create New Account</div>
-          <div className='w-1/2'>
-            <label className='flex flex-col gap-1'>
-              First Name
+      <form onSubmit={handleSubmit} className='relative h-[calc(100vh-80px)]'>
+        <video
+          src="img/bg-video.mp4"
+          className='absolute h-full w-full object-cover filter'
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+
+        <div className='relative flex flex-col justify-center px-60 gap-8 items-center py-10 font-manrope text-white h-full'>
+          <div className="text-4xl font-bold uppercase">Create New Account</div>
+
+          <div className='flex flex-col gap-4 w-full items-center'>
+            <div className='w-1/2'>
               <input
                 type="text"
                 name="fName"
                 onChange={handleInputChange}
                 value={formData.fName}
-                className='outline-none px-4 py-2 rounded-lg border-2'
+                className='outline-none px-4 py-2 border-2 w-full bg-transparent'
+                placeholder='First Name'
                 required />
-            </label>
-          </div>
-          <div className='w-1/2'>
-            <label className='flex flex-col gap-1'>
-              Last Name
+            </div>
+            <div className='w-1/2'>
               <input
                 type="text"
                 name='lName'
                 value={formData.lName}
                 onChange={handleInputChange}
-                className='outline-none px-4 py-2 rounded-lg border-2'
+                className='outline-none px-4 py-2 border-2 w-full bg-transparent'
+                placeholder='Last Name'
                 required />
-            </label>
-          </div>
-          <div className='w-1/2'>
-            <label className='flex flex-col gap-1'>
-              Email Address
+            </div>
+            <div className='w-1/2'>
               <input
                 type="email"
                 name='email'
                 value={formData.email}
                 onChange={handleInputChange}
-                className='outline-none px-4 py-2 rounded-lg border-2'
+                className='outline-none px-4 py-2 border-2 w-full bg-transparent'
+                placeholder='Email Address'
                 required />
-            </label>
-          </div>
-          <div className='w-1/2'>
-            <label className='flex flex-col gap-1'>
-              Password
+            </div>
+            <div className='w-1/2'>
               <input
                 type={passwordShown ? 'text' : 'password'}
                 name='password'
                 value={formData.password}
                 onChange={handleInputChange}
-                className='outline-none px-4 py-2 rounded-lg border-2'
+                className='outline-none px-4 py-2 border-2 w-full bg-transparent'
+                placeholder='Password'
                 required />
-            </label>
+            </div>
           </div>
           <div className='flex flex-col w-full items-center'>
-
-
             <div className='w-1/2'>
               <div className='flex gap-2 items-center'>
                 <input
@@ -157,34 +159,34 @@ const SignUp = () => {
                   checked={passwordShown}
                   onChange={PasswordVisibility}
                   id="password-checked"
-                  className='w-4 h-4'
+                  className='w-4 h-4 accent-black checked:ring-1 checked:ring-white'
                 />
                 <label htmlFor="password-checked">Show Password</label>
               </div>
             </div>
             <div className='w-1/2 py-2'>
-              <input type="submit" className='bg-blue-700 text-white w-full py-2 rounded-lg cursor-pointer hover:bg-blue-600' />
+              <input type="submit" className='bg-[#f7f7f733] text-white w-full py-2 border-2 border-white cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' />
             </div>
             <div>
-              Already have a Account?<Link to={'/login'} className='text-blue-600 font-semibold'> Login</Link>
+              Already have a Account?<Link to={'/login'} className=' font-bold'> Login</Link>
             </div>
           </div>
         </div>
       </form>
 
       {/* code for pop up */}
-      <div id="popup" className={`${verifyOTP ? '' : 'hidden'} fixed top-0 left-0 w-full h-full z-1 font-manrope`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)', transition: 'opacity 0.5s ease, visibility 0.5s ease' }}>
-        <div className='bg-white mx-auto my-[15%] p-5 border-1 w-[300px] text-center rounded-lg'>
+      <div id="popup" className={`${verifyOTP ? '' : 'hidden'} fixed top-0 left-0 w-full h-full z-1 font-manrope`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', transition: 'opacity 0.5s ease, visibility 0.5s ease' }}>
+        <div className='bg-transparent border-2 border-white text-white mx-auto my-[15%] p-5 border-1 w-[300px] text-center flex flex-col gap-4'>
           <div className='font-semibold text-xl'>Verify OTP</div>
-          <form onSubmit={handleOtpSubmit} className='flex flex-col mt  -3 gap-2'>
-            <input type="text" name="otp" value={otp} onChange={handleOtpChange} className='border-2 rounded-lg py-1 px-2' placeholder='Enter OTP' />
-            <input type="submit" className='bg-blue-700 text-white rounded-lg py-1 cursor-pointer hover:bg-blue-600' />
+          <form onSubmit={handleOtpSubmit} className='flex flex-col gap-2'>
+            <input type="text" name="otp" value={otp} onChange={handleOtpChange} className='border-2 bg-transparent py-1 px-2' placeholder='Enter OTP' />
+            <input type="submit" className='bg-[#f7f7f733] border-2 border-white text-white py-1 cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' />
           </form>
           <div className='w-full'>
-            <button 
-            disabled={isDisabled} 
-            className={`text-left text-[14px] ${isDisabled ? 'text-gray-400 cursor-not-allowed' : 'text-black cursor-pointer'}`}
-            onClick={resendOTP}
+            <button
+              disabled={isDisabled}
+              className={`text-left text-[14px] ${isDisabled ? 'text-white cursor-not-allowed' : 'text-slate-300 cursor-pointer'}`}
+              onClick={resendOTP}
             >Resend OTP {isDisabled && `(${countdown}s)`}</button>
           </div>
         </div>
