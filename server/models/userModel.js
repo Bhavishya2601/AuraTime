@@ -61,6 +61,8 @@ const User = {
 
             transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {
+                    console.log(err)
+                    console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
                     console.log('error while sending otp')
                     throw 'error while sending otp'
                 }
