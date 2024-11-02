@@ -12,10 +12,11 @@ const UserProvider = ({children}) => {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/dashboard`, {
               withCredentials: true,
             })
+            // console.log(response)
             setUserData(response.data)
           } catch (err){
-            console.log('Error fetching dashboard data')
-            console.log(err)
+            console.log('User doesn\'t exist')
+            // console.log(err)
           }
         }
     

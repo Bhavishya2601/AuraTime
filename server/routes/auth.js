@@ -8,11 +8,14 @@ import bcrypt from 'bcrypt'
 import axios from 'axios'
 import express from 'express'
 import passport from 'passport';
-import session from 'express-session';
+// import session from 'express-session';
+// import pgSession from 'connect-pg-simple'
 import { Strategy } from 'passport-local'
 import GoogleStrategy from 'passport-google-oauth2'
 import GithubStrategy from 'passport-github2'
 import DiscordStrategy from 'passport-discord'
+
+// const PgSession = pgSession(session)
 
 const generateToken = (user) => {
     return jwt.sign(
@@ -24,19 +27,8 @@ const generateToken = (user) => {
 
 const router = express.Router();
 
-router.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true
-}))
-
 router.use(passport.initialize())
 router.use(passport.session())
-
-// router.post('/login', passport.authenticate('local', {
-//     successRedirect: `${process.env.FRONTEND_URL}/dashboard`,
-//     failureRedirect: `${process.env.FRONTEND_URL}/login`
-// }))
 
 router.post('/login', (req, res, next)=>{
     passport.authenticate('local', (err, user, info)=>{
@@ -169,8 +161,8 @@ passport.use('google', new GoogleStrategy({
             return cb(null, result.rows[0])
         }
     } catch (err) {
-        console.log('Something went wrong while logging through Google')
-        cb(err);
+        console.error('Error logging in with Google:', err);
+        cb(null, false, { message: 'Failed to log in with Google. Please try again later.' });
     }
 }))
 

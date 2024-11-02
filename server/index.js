@@ -4,30 +4,16 @@ dotenv.config()
 import express from "express";
 import cors from 'cors'
 import pg from 'pg'
+import session from 'express-session';
+import pgSession from 'connect-pg-simple'
 import cookieParser from 'cookie-parser';
 
 import userRouter from './routes/user.js'
 import authRouter from './routes/auth.js'
-// import { Cookie } from 'express-session';
 
 const app = express();
 const port = process.env.PORT
-
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-app.use(cookieParser())
-
-app.use(cors({
-    origin: `${process.env.FRONTEND_URL || 'http://localhost:5173'}`,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}))
-
-app.options('*', cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-    credentials: true
-}))
+const PgSession = pgSession(session)
 
 // checking if any database variable is missing
 const requiredEnv = ['DB_USER', 'DB_HOST', 'DB_PASSWORD', 'DB_DATABASE', 'DB_PORT'];
@@ -60,6 +46,37 @@ const startServer = () =>{
 }
 
 startServer()
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(cookieParser())
+
+app.use(cors({
+    origin: `${process.env.FRONTEND_URL || 'http://localhost:5173'}`,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
+
+app.use(session({
+    store: new PgSession({
+        pool: db,
+        tableName: 'session',
+        createTableIfMissing: true
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: true,
+        sameSite: 'Lax'
+    }
+}))
+
+// app.options('*', cors({
+//     origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+//     credentials: true
+// }))
 
 app.get('/', (req, res)=>{
     res.send('Backend Started')

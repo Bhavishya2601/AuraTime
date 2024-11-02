@@ -14,7 +14,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
     console.log('logging out')
     const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/logout`)
-    console.log(response)
+    // console.log(response.data)
     if (response.status === 200){
       // setUserData(null)
       console.log('success log out')
