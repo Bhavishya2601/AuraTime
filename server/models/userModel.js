@@ -16,6 +16,8 @@ function generateOTP() {
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
+    port: 465,
+    secure: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -26,6 +28,7 @@ let otpStore = {}
 
 const User = {
     create: async (userData) => { // register
+        console.log('entered right route')
         await db.query(`
             CREATE TABLE IF NOT EXISTS users_account (
                 id SERIAL PRIMARY KEY,
@@ -42,16 +45,18 @@ const User = {
         let result = await db.query('SELECT * FROM users_account WHERE email=$1', [email])
 
         if (result.rows.length > 0) {
+            console.log('User already exists')
             throw 'User Already Exists'
         } else {
 
             const otp = generateOTP()
             const generateAt = Date.now()
+            console.log('OTP generated')
 
             otpStore[email] = { otp, generateAt }
 
             const htmlContent = otpTemplate(otp, `${fName} ${lName}`)
-
+            console.log('going for mail')
             const mailOptions = {
                 from: process.env.EMAIL_PASS,
                 to: email,
@@ -76,6 +81,7 @@ const User = {
     verifyOtp: async (userData) => { // verify otp while registration
         const { fName, lName, email, password, otp } = userData
         const currentTime = Date.now()
+        console.log('Found otp route')
 
         if (otpStore[email]) {
             const { otp: storeOTP, generateAt } = otpStore[email]
