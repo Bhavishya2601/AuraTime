@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Card from '../components/Card'
 import Blog from '../components/Blog'
+import Footer from '../components/Footer'
 
 import { home_watch, blogs } from '../constants/index'
 
@@ -103,6 +104,7 @@ const Home = () => {
           })}
         </div>
       </div>
+      <Footer />
     </>
   )
 }

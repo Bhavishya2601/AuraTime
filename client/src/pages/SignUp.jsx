@@ -73,16 +73,24 @@ const SignUp = () => {
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault()
+    try {
 
-    const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/verify_otp`, { ...formData, otp })
-    if (result.data.success || result.status == 201) {
-      // localStorage.setItem('token', result.data.token)
-      toast.success('Account Created')
-      setTimeout(() => {
-        navigate('/dashboard')
-      }, 2000)
-    } else {
+      const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/verify_otp`, { ...formData, otp })
+      console.log(result)
+      if (result.data.success || result.status == 201) {
+        toast.success('Account Created')
+        setTimeout(() => {
+          navigate('/dashboard')
+        }, 2000)
+      }
+    } catch (err) {
       toast.error('Something Went Wrong!!')
+      setVerifyOTP(false)
+      setFormData({
+        ...formData,
+        password: ''
+      })
+      setOtp('')
     }
   }
 
@@ -95,7 +103,7 @@ const SignUp = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className='relative h-[calc(100vh-80px)]'>
+      <form onSubmit={handleSubmit} className='relative h-[calc(100vh-72px)]'>
         <video
           src="img/bg-video.mp4"
           className='absolute h-full w-full object-cover filter'

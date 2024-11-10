@@ -70,7 +70,7 @@ const Login = () => {
   }
 
   return (
-    <div className='relative h-[calc(100vh-70px)]'>
+    <div className='relative h-[calc(100vh-72px)]'>
       <video
         src="img/bg-video.mp4"
         className='absolute h-full w-full object-cover filter'

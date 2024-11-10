@@ -27,7 +27,7 @@ router.get('/dashboard', (req, res)=>{
     res.set('Cache-Control', 'no-store');
     const token = req.cookies.jwt
     if (!token){
-        console.log('No route found')
+        console.log('No user found')
         return res.status(401).json({message: 'UnAuthorized No token found'})
     }
     jwt.verify(token, process.env.JWT_SECRET, async (err, decoded)=>{

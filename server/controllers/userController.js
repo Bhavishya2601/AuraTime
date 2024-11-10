@@ -12,7 +12,7 @@ const generateToken = (user) => {
 export const signup = async (req, res)=>{
     try{
         const newUser = await User.create(req.body)
-        res.status(201).json(newUser)
+        res.status(201).json(newUser)   
     } catch (err){
         console.log(err)
 
@@ -27,13 +27,13 @@ export const signup = async (req, res)=>{
 export const verify_otp = async (req, res) =>{
     try{
         const result = await User.verifyOtp(req.body)
-        // console.log(result)
         const token = generateToken(result)
+        console.log(token)
         res.cookie('jwt', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: true,
             maxAge: 24 * 60 * 60 * 1000,
-            sameSite: 'Lax'
+            sameSite: 'None'
         })
         res.status(201).json(result)
     } catch (err) {

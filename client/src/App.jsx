@@ -8,11 +8,11 @@ import Contact from './pages/Contact'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
+import Profile from './pages/Profile'
 import Error_404 from './pages/Error_404'
 import { Toaster } from 'react-hot-toast'
 
 import Header from './components/Header'
-import Footer from './components/Footer'
 
 function App() {
 
@@ -29,10 +29,9 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/dashboard' element={<Dashboard />} />
-            {/* <Route path='/dashboard/profile' element={<Profile />} /> */}
+            <Route path='/profile' element={<Profile />} />
             <Route path='*' element={<Error_404 />} />
           </Routes>
-          <Footer />
         </BrowserRouter>
       </UserProvider>
     </>
