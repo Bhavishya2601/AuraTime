@@ -51,12 +51,12 @@ const User = {
 
             const otp = generateOTP()
             const generateAt = Date.now()
-            // console.log('OTP generated')
+            console.log('OTP generated')
 
             otpStore[email] = { otp, generateAt }
 
             const htmlContent = otpTemplate(otp, `${fName} ${lName}`)
-            // console.log('going for mail')
+            console.log('mailOptions')
             const mailOptions = {
                 from: process.env.EMAIL_PASS,
                 to: email,
@@ -64,6 +64,7 @@ const User = {
                 html: htmlContent
             }
 
+            console.log('transporter')
             transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {
                     console.log(err)
@@ -79,6 +80,7 @@ const User = {
     },
 
     verifyOtp: async (userData) => { // verify otp while registration
+        console.log('Entered verify')
         const { fName, lName, email, password, otp } = userData
         const currentTime = Date.now()
         // console.log('Found otp route')

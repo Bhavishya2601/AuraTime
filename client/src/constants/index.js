@@ -1,23 +1,23 @@
 export const home_watch = [
     {
-        img : '1.png',
+        img : 'watch/1.png',
         name : 'Daniel Wellington',
         prev: '$120.00',
         price: '$95.00'
     },
     {
-        img : '2.png',
+        img : 'watch/2.png',
         name : 'Ongines Primaluna',
         price: '$240.00'
     },
     {
-        img : '3.png',
+        img : 'watch/3.png',
         name : 'Gunmetal Sandstone',
         prev: "$150.00",
         price: '$120.00'
     },
     {
-        img : '4.png',
+        img : 'watch/4.png',
         name : 'Anthracite Watch',
         prev: "$125.00",
         price: '$112.00'

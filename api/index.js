@@ -9,10 +9,10 @@ const app = express()
 const port = process.env.PORT
 
 app.use(express.json())
-// app.use(cors())
+app.use(cors())
 
 app.get('/', (req, res)=>{
-    res.send('hello world')
+    res.send('API is Running')
 })
 
 app.use('/api/v1/watch', userRoutes)

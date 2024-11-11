@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 
 import user from '../assets/user.svg'
+import cart from '../assets/cart.svg'
 
 const Header = () => {
   const [dropdown, setDropdown] = useState(false)
@@ -27,14 +28,16 @@ const Header = () => {
   // }, [])
 
   return (
-    <div className='flex w-full items-center justify-between px-48 py-4 text-lg shadow-lg bg-black text-white'>
+    <div className={`flex w-full items-center justify-between ${userData? 'px-28' : "px-48"} py-4 text-lg shadow-lg bg-black text-white`}>
       <div>
         <img src="logo1.png" alt="AuraTime" className='h-10' />
       </div>
-      <div className='flex gap-10 font-semibold text-lg font-manrope items-center'>
+      <div className='flex gap-8 font-semibold text-lg font-manrope items-center'>
         <div className='hover:text-[#CBBA9C]'><Link to={'/'}>HOME</Link></div>
         <div className='hover:text-[#DAC887]'><Link to={'/about'}>ABOUT</Link></div>
         <div className='hover:text-[#DAC887]'><Link to={'/contact'}>CONTACT</Link></div>
+        <div className='flex items-end gap-4'>
+
         {userData && <div className='relative' 
         // ref={dropdownRef}
         >
@@ -52,6 +55,10 @@ const Header = () => {
             </div>
           )}
         </div>}
+        {userData && <div>
+          <img src={cart} alt="cart" className='h-6 cursor-pointer' />
+          </div>}
+      </div>
       </div>
     </div>
   )

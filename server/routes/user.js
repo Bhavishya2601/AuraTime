@@ -45,16 +45,27 @@ router.get('/dashboard', (req, res)=>{
     })
 })
 
-router.get('/logout', (req, res) => {
-    res.clearCookie('jwt', {path: '/', httpOnly: true, secure: true, sameSite: 'Strict'});
+// router.get('/logout', (req, res) => {
+//     res.clearCookie('jwt', {path: '/', httpOnly: true, secure: true, sameSite: 'Strict'});
 
-    req.session.destroy((err) => {
-        if (err) {
-            console.error('Error destroying session:', err);
-            return res.status(500).json({ message: 'Logout failed' });
-        }
-        res.status(200).json({ message: 'Logout successful' });
-    });
-});
+//     req.session.destroy((err) => {
+//         if (err) {
+//             console.error('Error destroying session:', err);
+//             return res.status(500).json({ message: 'Logout failed' });
+//         }
+//         res.status(200).json({ message: 'Logout successful' });
+//     });
+// });
+router.get('/data', async (req, res)=>{
+    const {id} = req.query
+    try{
+        const response = await db.query('SELECT * FROM users_account WHERE id=$1', [id])
+        console.log(response.rows)
+        return res.json(response.rows[0])
+    } catch (err){
+        console.log(err)
+        res.status(404).json({error: 'profile data not fetched'})
+    }
+})
 
 export default router
