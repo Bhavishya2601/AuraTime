@@ -23,7 +23,7 @@ router.post('/signup', signup)
 // router.post('/login', login)
 router.post('/verify_otp', verify_otp)
 
-router.get('/dashboard', (req, res)=>{
+router.get('/checkUser', (req, res)=>{
     res.set('Cache-Control', 'no-store');
     const token = req.cookies.jwt
     if (!token){

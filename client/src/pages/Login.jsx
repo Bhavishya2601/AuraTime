@@ -11,10 +11,9 @@ import discord from '../assets/discord.svg'
 const Login = () => {
   const navigate = useNavigate()
 
-  const { userData } = useUser()
+  const { userData, setIsLoggedIn } = useUser()
   useEffect(() => {
-
-    if (userData != null) {
+    if (Object.entries(userData).length > 0) {
       navigate('/dashboard')
     }
   }, [userData])
@@ -33,9 +32,10 @@ const Login = () => {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, formData, {
         withCredentials: true
       })
-      console.log(response.data)
+      // console.log(response.data)
 
       toast.success('Login Successful')
+      setIsLoggedIn(true)
       setTimeout(() => {
         navigate('/dashboard')
       }, 2000)

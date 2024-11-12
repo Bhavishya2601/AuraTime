@@ -68,8 +68,8 @@ const User = {
             transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {
                     console.log(err)
-                    // console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
-                    // console.log('error while sending otp')
+                    console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
+                    console.log('error while sending otp')
                     throw new Error('error while sending otp')
                 }
                 console.log('mail send')
@@ -83,7 +83,7 @@ const User = {
         console.log('Entered verify')
         const { fName, lName, email, password, otp } = userData
         const currentTime = Date.now()
-        // console.log('Found otp route')
+        console.log('Found otp route')
 
         if (otpStore[email]) {
             const { otp: storeOTP, generateAt } = otpStore[email]

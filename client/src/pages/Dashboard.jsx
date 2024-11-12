@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useUser } from '../context/UserContext'
 // import toast, { Toaster } from 'react-hot-toast'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Card from '../components/Card'
 import Footer from '../components/Footer'
@@ -10,13 +10,19 @@ import leftArrow from '../assets/leftArrow.svg'
 import rightArrow from '../assets/rightArrow.svg'
 
 const Dashboard = () => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const { userData, setUserData } = useUser()
   const itemsPerPage = 12;
 
   const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
+
+  useEffect(()=>{
+    if (Object.entries(userData).length === 0){
+      navigate('/login')
+    }
+  }, [userData])
 
   const fetchProducts = async () => {
     try {

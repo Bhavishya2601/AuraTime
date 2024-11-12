@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 
@@ -7,28 +7,21 @@ import cart from '../assets/cart.svg'
 
 const Header = () => {
   const [dropdown, setDropdown] = useState(false)
-  const { userData, setUserData, isLoading} = useUser()
-  // const dropdownRef = useRef(null)
+  const { userData, isLoading } = useUser()
+  const [userExist, setUserExist] = useState(false)
 
   const toggleDropdown = () => {
     setDropdown(prev => !prev)
   }
 
-  // const handleClickOutside = (e) =>{
-  //   if (dropdown.current && !dropdown.current.contains(e.target)){
-  //     setTimeout(() => setDropdown(false), 1);
-  //   }
-  // }
-
-  // React.useEffect(()=>{
-  //   document.addEventListener('mousedown', handleClickOutside)
-  //   return () => {
-  //     document.addEventListener('mousedown', handleClickOutside)
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!isLoading && Object.entries(userData).length > 0) {
+      setUserExist(true)
+    }
+  }, [userData, isLoading])
 
   return (
-    <div className={`flex w-full items-center justify-between ${userData? 'px-28' : "px-48"} py-4 text-lg shadow-lg bg-black text-white`}>
+    <div className={`flex w-full items-center justify-between ${userData ? 'px-28' : "px-48"} py-4 text-lg shadow-lg bg-black text-white`}>
       <div>
         <img src="logo1.png" alt="AuraTime" className='h-10' />
       </div>
@@ -38,27 +31,29 @@ const Header = () => {
         <div className='hover:text-[#DAC887]'><Link to={'/contact'}>CONTACT</Link></div>
         <div className='flex items-end gap-4'>
 
-        {userData && <div className='relative' 
-        // ref={dropdownRef}
-        >
-          <img src={user} alt="user" className='h-6 cursor-pointer' onClick={toggleDropdown} />
-          {dropdown && (
-            <div className='absolute right-0 mt-3 w-36 bg-white text-black rounded-lg shadow-lg'>
-              <Link to='/profile'>
-                <div className='px-4 py-2 hover:bg-gray-200 rounded-lg'>
-                  Profile
-                </div>
-              </Link>
-              <div className='px-4 py-2 rounded-lg hover:bg-gray-200 '>
-                <Link to='/logout'>Logout</Link>
+          {userExist &&
+            <>
+              <div className='relative' >
+                <img src={user} alt="user" className='h-6 cursor-pointer' onClick={toggleDropdown} />
+                {dropdown && (
+                  <div className='absolute right-0 mt-3 w-36 bg-white text-black rounded-lg shadow-lg'>
+                    <Link to='/profile'>
+                      <div className='px-4 py-2 hover:bg-gray-200 rounded-lg'>
+                        Profile
+                      </div>
+                    </Link>
+                    <div className='px-4 py-2 rounded-lg hover:bg-gray-200 '>
+                      <Link to='/logout'>Logout</Link>
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          )}
-        </div>}
-        {userData && <div>
-          <img src={cart} alt="cart" className='h-6 cursor-pointer' />
-          </div>}
-      </div>
+              <div>
+                <img src={cart} alt="cart" className='h-6 cursor-pointer' />
+              </div>
+            </>
+          }
+        </div>
       </div>
     </div>
   )
