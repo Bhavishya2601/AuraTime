@@ -40,7 +40,6 @@ router.post('/login', (req, res, next)=>{
                 error: info ? info.message : 'Invalid credentials'
             })
         }
-        try{
         const token = generateToken(user)
         // console.log(token)
         res.cookie('jwt', token, {
@@ -49,10 +48,6 @@ router.post('/login', (req, res, next)=>{
             maxAge: 24 * 60 * 60 * 1000,
             sameSite: 'Strict'
         })
-    }
-    catch(err){
-        console.log(err);
-    }
         
         return res.status(200).json({message: 'Login Successful', token})
     })(req, res, next)
