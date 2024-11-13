@@ -51,6 +51,9 @@ const Profile = () => {
             </div>
           </div>
         </div>
+        // delete account 
+        // add products max 5
+        // change password
         : <div className='h-[70vh] flex justify-center items-center'>
           <img src="img/loader.gif" alt="loader" className='h-20' />
         </div>
