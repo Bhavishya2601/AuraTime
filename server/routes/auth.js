@@ -46,7 +46,7 @@ router.post('/login', (req, res, next)=>{
             httpOnly: true,
             secure: true,
             maxAge: 24 * 60 * 60 * 1000,
-            sameSite: 'Strict'
+            sameSite: 'None'
         })
         
         return res.status(200).json({message: 'Login Successful', token})
