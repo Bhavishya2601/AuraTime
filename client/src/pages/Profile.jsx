@@ -23,7 +23,8 @@ const Profile = () => {
   useEffect(() => {
     // console.log(userData, isLoading)
     if (!isLoading && Object.entries(userData).length === 0){
-      navigate('/login')
+      alert('redirect to login')
+      // navigate('/login')
     }
     if (!isLoading && userData) {
       fetchUserData()

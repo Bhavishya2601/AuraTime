@@ -81,9 +81,9 @@ const User = {
         } else {
             console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
 
-            sendMail(userData)
+            return sendMail(userData)
 
-            return email
+            // return email
         }
     },
 
