@@ -40,3 +40,13 @@ export const verify_otp = async (req, res) =>{
         res.status(404).json({error: 'OTP verification failed'})
     }
 }
+
+export const otp_resend = async (req, res) =>{
+    try{
+        const result = await User.otp_resend(req.body)
+        res.status(200).json(result)
+    } catch (err){
+        console.log(err)
+        res.status(404).json({error: 'Something went wrong'})
+    }
+}

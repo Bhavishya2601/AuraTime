@@ -65,14 +65,14 @@ const Dashboard = () => {
         {[...Array(totalPages)].map((_, index)=>(
           <button
           key = {index+1}
-          className={`${currentPage === index+1 ? 'active' : ''} text-lg border-2 text-black hover:text-white hover:border-[#cbba9c] hover:bg-[#cbba9c] py-2 px-4 transition-all duration-200`}
+          className={`${currentPage === index+1 ? 'text-white border-[#cbba9c] bg-[#cbba9c]' : ''} text-lg border-2 text-black hover:text-white hover:border-[#cbba9c] hover:bg-[#cbba9c] py-2 px-4 transition-all duration-200`}
           onClick={()=>paginate(index+1)}
           >
             {index+1}
           </button>)
        )}
         <button onClick={()=>paginate(currentPage+1)} className={`${currentPage === totalPages ? 'hidden' : ''} group p-2 border-2  bg-white hover:bg-[#cbba9c] transition-all duration-200`}>
-        <img src={rightArrow} alt="next" className='h-7' />
+        <img src={rightArrow} alt="next" className='h-7 group-hover:invert' />
         </button>
       </div>
 

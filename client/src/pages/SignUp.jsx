@@ -94,11 +94,23 @@ const SignUp = () => {
     }
   }
 
-  const resendOTP = () => {
-    // resend otp implement karna hai
-    isDisabled(true)
-    setCountdown(30)
-    toast.success('OTP send Successfully')
+  const resendOTP = async () => {
+    try{
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/resend-otp`, { email: formData.email, fName: formData.fName, lName: formData.lName })
+      console.log(response)
+      if (response.status === 200){
+        setIsDisabled(true)
+        setCountdown(30)
+        toast.success('OTP send Successfully')
+      } else {
+        toast.error('Something went wrong')
+        setTimeout(() => {
+          navigate('/login')
+        }, 200);
+      }
+    } catch (err) {
+      console.log('error fetching ',err.message)
+    }
   }
 
   return (

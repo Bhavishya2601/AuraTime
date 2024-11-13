@@ -9,9 +9,16 @@ const Header = () => {
   const [dropdown, setDropdown] = useState(false)
   const { userData, isLoading } = useUser()
   const [userExist, setUserExist] = useState(false)
+  const dropdownRef = useRef(null)
 
   const toggleDropdown = () => {
     setDropdown(prev => !prev)
+  }
+
+  const handleClickOutside = () => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdown(false)
+    }
   }
 
   useEffect(() => {
@@ -20,31 +27,45 @@ const Header = () => {
     }
   }, [userData, isLoading])
 
+  useEffect(() => {
+    if (dropdown) {
+      document.addEventListener('mousedown', handleClickOutside)
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [dropdown])
+
   return (
-    <div className={`flex w-full items-center justify-between ${userData ? 'px-28' : "px-48"} py-4 text-lg shadow-lg bg-black text-white`}>
+    <div className={`flex w-full items-center justify-between ${userData ? 'px-32' : "px-48"} py-4 text-lg shadow-lg bg-black text-white`}>
       <div>
         <img src="logo1.png" alt="AuraTime" className='h-10' />
       </div>
-      <div className='flex gap-8 font-semibold text-lg font-manrope items-center'>
+      <div className={`flex gap-${userExist? '6' : '8'} font-semibold text-lg font-manrope items-center`}>
         <div className='hover:text-[#CBBA9C]'><Link to={'/'}>HOME</Link></div>
         <div className='hover:text-[#DAC887]'><Link to={'/about'}>ABOUT</Link></div>
         <div className='hover:text-[#DAC887]'><Link to={'/contact'}>CONTACT</Link></div>
-        <div className='flex items-end gap-4'>
+        <div className='flex gap-5 items-center'>
 
           {userExist &&
             <>
-              <div className='relative' >
+              <div className='hover:text-[#DAC887]'><Link to={'/dashboard'}>SHOP</Link></div>
+              <div className='relative' ref={dropdownRef}>
                 <img src={user} alt="user" className='h-6 cursor-pointer' onClick={toggleDropdown} />
                 {dropdown && (
                   <div className='absolute right-0 mt-3 w-36 bg-white text-black rounded-lg shadow-lg'>
-                    <Link to='/profile'>
+                    <Link to='/profile' onClick={() => setDropdown(false)}>
                       <div className='px-4 py-2 hover:bg-gray-200 rounded-lg'>
                         Profile
                       </div>
                     </Link>
-                    <div className='px-4 py-2 rounded-lg hover:bg-gray-200 '>
-                      <Link to='/logout'>Logout</Link>
-                    </div>
+                    <Link to='/logout' onClick={() => setDropdown(false)}>
+                      <div className='px-4 py-2 rounded-lg hover:bg-gray-200 '>
+                        Logout
+                      </div>
+                    </Link>
                   </div>
                 )}
               </div>

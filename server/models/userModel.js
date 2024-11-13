@@ -26,9 +26,40 @@ const transporter = nodemailer.createTransport({
 
 let otpStore = {}
 
+const sendMail = (userData) =>{
+    console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
+
+    const { email, fName, lName } = userData
+    const otp = generateOTP()
+    const generateAt = Date.now()
+    console.log('OTP generated')
+
+    otpStore[email] = { otp, generateAt }
+
+    const htmlContent = otpTemplate(otp, `${fName} ${lName}`)
+    console.log('mailOptions')
+    const mailOptions = {
+        from: process.env.EMAIL_PASS,
+        to: email,
+        subject: 'Verify your email address for AuraTime',
+        html: htmlContent
+    }
+
+    console.log('transporter')
+    console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
+    transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            console.log(err)
+            console.log('error while sending otp')
+            throw new Error('error while sending otp')
+        }
+        console.log('mail send')
+    })
+    return email
+}
+
 const User = {
-    create: async (userData) => { // register
-        // console.log('entered right route')
+    create: async (userData) => { 
         await db.query(`
             CREATE TABLE IF NOT EXISTS users_account (
                 id SERIAL PRIMARY KEY,
@@ -48,38 +79,15 @@ const User = {
             console.log('User already exists')
             throw new Error('User Already Exists')
         } else {
+            console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
 
-            const otp = generateOTP()
-            const generateAt = Date.now()
-            console.log('OTP generated')
-
-            otpStore[email] = { otp, generateAt }
-
-            const htmlContent = otpTemplate(otp, `${fName} ${lName}`)
-            console.log('mailOptions')
-            const mailOptions = {
-                from: process.env.EMAIL_PASS,
-                to: email,
-                subject: 'Verify your email address for AuraTime',
-                html: htmlContent
-            }
-
-            console.log('transporter')
-            transporter.sendMail(mailOptions, (err, info) => {
-                if (err) {
-                    console.log(err)
-                    console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
-                    console.log('error while sending otp')
-                    throw new Error('error while sending otp')
-                }
-                console.log('mail send')
-            })
+            sendMail(userData)
 
             return email
         }
     },
 
-    verifyOtp: async (userData) => { // verify otp while registration
+    verifyOtp: async (userData) => { 
         console.log('Entered verify')
         const { fName, lName, email, password, otp } = userData
         const currentTime = Date.now()
@@ -116,6 +124,10 @@ const User = {
             throw new Error('No otp found')
         }
     },
+
+    otp_resend: async (userData) => {
+        return sendMail(userData)
+    }
 
     // read: async (userData) => { // login
     //     const { email, password } = userData

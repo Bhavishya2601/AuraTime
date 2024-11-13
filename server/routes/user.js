@@ -1,7 +1,6 @@
 import express from 'express'
-import {signup} from '../controllers/userController.js'
+import {signup, verify_otp, otp_resend} from '../controllers/userController.js'
 // import { login } from '../controllers/userController.js'
-import { verify_otp } from '../controllers/userController.js'
 
 import { db } from '../index.js'
 import jwt from 'jsonwebtoken'
@@ -22,6 +21,7 @@ router.use(passport.session())
 router.post('/signup', signup)
 // router.post('/login', login)
 router.post('/verify_otp', verify_otp)
+router.post('/resend-otp', otp_resend)
 
 router.get('/checkUser', (req, res)=>{
     res.set('Cache-Control', 'no-store');
@@ -44,6 +44,7 @@ router.get('/checkUser', (req, res)=>{
         }
     })
 })
+
 
 // router.get('/logout', (req, res) => {
 //     res.clearCookie('jwt', {path: '/', httpOnly: true, secure: true, sameSite: 'Strict'});
