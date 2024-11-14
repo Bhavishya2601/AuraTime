@@ -56,7 +56,6 @@ const SignUp = () => {
     e.preventDefault()
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signup`, { email: formData.email, fName: formData.fName, lName: formData.lName })
-      console.log(response.status)
       if (response.data.success || response.status == 201) {
 
         setVerifyOTP(true); // pop up to verify otp
@@ -66,8 +65,7 @@ const SignUp = () => {
         toast.error('Something Went Wrong!!')
       }
     } catch (err) {
-      toast.error('Something Went Wrong!!')
-      console.log(err.message)
+      toast.error('Something Went Wrong!!', err.message)
     }
   }
 
@@ -75,8 +73,9 @@ const SignUp = () => {
     e.preventDefault()
     try {
 
-      const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/verify_otp`, { ...formData, otp })
-      console.log(result)
+      const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/verify_otp`, { ...formData, otp }, {
+        withCredentials: true
+      })
       if (result.data.success || result.status == 201) {
         toast.success('Account Created')
         setTimeout(() => {
@@ -97,7 +96,6 @@ const SignUp = () => {
   const resendOTP = async () => {
     try{
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/resend-otp`, { email: formData.email, fName: formData.fName, lName: formData.lName })
-      console.log(response)
       if (response.status === 200){
         setIsDisabled(true)
         setCountdown(30)

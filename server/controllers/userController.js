@@ -28,7 +28,6 @@ export const verify_otp = async (req, res) =>{
     try{
         const result = await User.verifyOtp(req.body)
         const token = generateToken(result)
-        console.log(token)
         res.cookie('jwt', token, {
             httpOnly: true,
             secure: true,

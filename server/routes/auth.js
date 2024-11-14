@@ -33,7 +33,6 @@ router.use(passport.session())
 router.post('/login', (req, res, next)=>{
     passport.authenticate('local', (err, user, info)=>{
         
-        // console.log(user)
         if (err || !user){
             return res.status(400).json({
                 message: 'Login Failed',
@@ -41,7 +40,6 @@ router.post('/login', (req, res, next)=>{
             })
         }
         const token = generateToken(user)
-        // console.log(token)
         res.cookie('jwt', token, {
             httpOnly: true,
             secure: true,

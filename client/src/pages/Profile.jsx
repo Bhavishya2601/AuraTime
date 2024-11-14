@@ -12,7 +12,7 @@ const Profile = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/data`, {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/profile`, {
         params: { id: userData.id }
       })
       setProfileData(response.data)
@@ -21,10 +21,8 @@ const Profile = () => {
     }
   }
   useEffect(() => {
-    // console.log(userData, isLoading)
     if (!isLoading && Object.entries(userData).length === 0){
-      alert('redirect to login')
-      // navigate('/login')
+      navigate('/login')
     }
     if (!isLoading && userData) {
       fetchUserData()

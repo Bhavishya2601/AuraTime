@@ -27,12 +27,12 @@ const transporter = nodemailer.createTransport({
 let otpStore = {}
 
 const sendMail = (userData) =>{
-    console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
-
+    
     const { email, fName, lName } = userData
     const otp = generateOTP()
     const generateAt = Date.now()
     console.log('OTP generated')
+    console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
 
     otpStore[email] = { otp, generateAt }
 
@@ -79,7 +79,7 @@ const User = {
             console.log('User already exists')
             throw new Error('User Already Exists')
         } else {
-            console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
+            console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email)
 
             return sendMail(userData)
 
@@ -128,27 +128,6 @@ const User = {
     otp_resend: async (userData) => {
         return sendMail(userData)
     }
-
-    // read: async (userData) => { // login
-    //     const { email, password } = userData
-
-    //     let result = await db.query('SELECT * FROM users_account WHERE email=$1', [email])
-    //     let user = result.rows[0]
-
-    //     if (result.rows.length > 0) {
-    //         const cpass = await bcrypt.compare(password, user.password);
-    //         if (cpass) {
-    //             console.log('verified')
-    //             return user;
-    //         } else {
-    //             console.log('Wrong password')
-    //             throw 'Wrong password'
-    //         }
-    //     } else {
-    //         console.log('User not found')
-    //         throw 'User not found'
-    //     }
-    // }
 }
 
 export default User;

@@ -13,6 +13,7 @@ const Login = lazy(() => import('./pages/Login'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Profile = lazy(() => import('./pages/Profile'));
+const Product = lazy(() => import('./pages/Product'));
 const Error_404 = lazy(() => import('./pages/Error_404'));
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <Route path='/signup' element={<SignUp />} />
               <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/profile' element={<Profile />} />
+              <Route path='/product' element={<Product />} />
               <Route path='*' element={<Error_404 />} />
             </Routes>
           </Suspense>

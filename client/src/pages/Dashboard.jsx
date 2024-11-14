@@ -20,8 +20,7 @@ const Dashboard = () => {
 
   useEffect(()=>{
     if (Object.entries(userData).length === 0){
-      alert('redirect to login')
-      // navigate('/login')
+      navigate('/login')
     }
   }, [userData])
 

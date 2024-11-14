@@ -19,7 +19,6 @@ router.use(passport.initialize())
 router.use(passport.session())
 
 router.post('/signup', signup)
-// router.post('/login', login)
 router.post('/verify_otp', verify_otp)
 router.post('/resend-otp', otp_resend)
 
@@ -36,7 +35,6 @@ router.get('/checkUser', (req, res)=>{
         try{
             const result = await db.query('SELECT id, email FROM users_account WHERE id=$1', [decoded.id])
             const user = result.rows[0]
-            // console.log(user)
             res.json({user})
         } catch (err){
             console.log('something went wrong')
@@ -45,19 +43,7 @@ router.get('/checkUser', (req, res)=>{
     })
 })
 
-
-// router.get('/logout', (req, res) => {
-//     res.clearCookie('jwt', {path: '/', httpOnly: true, secure: true, sameSite: 'Strict'});
-
-//     req.session.destroy((err) => {
-//         if (err) {
-//             console.error('Error destroying session:', err);
-//             return res.status(500).json({ message: 'Logout failed' });
-//         }
-//         res.status(200).json({ message: 'Logout successful' });
-//     });
-// });
-router.get('/data', async (req, res)=>{
+router.get('/profile', async (req, res)=>{
     const {id} = req.query
     try{
         const response = await db.query('SELECT * FROM users_account WHERE id=$1', [id])
