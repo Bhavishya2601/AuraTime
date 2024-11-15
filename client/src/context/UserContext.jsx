@@ -7,6 +7,15 @@ const UserProvider = ({children}) => {
     const [userData, setUserData] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [reTrigger, setReTrigger] = useState(0)
+
+    useEffect(()=>{
+      fetchData()
+    }, [reTrigger])
+
+    const refreshUser = () => {
+      setReTrigger(prev => prev + 1)
+    }
 
     const fetchData = async () => {
           
@@ -39,7 +48,7 @@ const UserProvider = ({children}) => {
       }, [isLoggedIn])
 
   return (
-      <UserContext.Provider value={{userData, setUserData, isLoading, isLoggedIn, setIsLoggedIn}}>
+      <UserContext.Provider value={{userData, setUserData, isLoading, isLoggedIn, setIsLoggedIn, refreshUser}}>
         {children}
       </UserContext.Provider>
   )

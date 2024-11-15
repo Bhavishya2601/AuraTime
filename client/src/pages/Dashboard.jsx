@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom'
 
 import Card from '../components/Card'
 import Footer from '../components/Footer'
-import leftArrow from '../assets/leftArrow.svg'
-import rightArrow from '../assets/rightArrow.svg'
+
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Dashboard = () => {
   const navigate = useNavigate()
-  const { userData, setUserData } = useUser()
+  const { userData, isLoading } = useUser()
   const itemsPerPage = 12;
 
   const [loading, setLoading] = useState(true)
@@ -19,10 +19,12 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(()=>{
-    if (Object.entries(userData).length === 0){
-      navigate('/login')
+    if (!isLoading){
+      if (Object.entries(userData).length === 0){
+        navigate('/login')
+      }
     }
-  }, [userData])
+  }, [userData, isLoading])
 
   const fetchProducts = async () => {
     try {
@@ -60,7 +62,7 @@ const Dashboard = () => {
 
       <div className='flex justify-center gap-3 my-5 text-white'>
         <button onClick={()=>paginate(currentPage-1)} className={`${currentPage === 1 ? 'hidden' : ''} group p-2 border-2 bg-white hover:bg-[#cbba9c] transition-all duration-200`}>
-          <img src={leftArrow} alt="prev" className='h-7 group-hover:invert' />
+          <IoIosArrowBack className='text-2xl text-black group-hover:text-white' />
         </button>
         {[...Array(totalPages)].map((_, index)=>(
           <button
@@ -72,7 +74,7 @@ const Dashboard = () => {
           </button>)
        )}
         <button onClick={()=>paginate(currentPage+1)} className={`${currentPage === totalPages ? 'hidden' : ''} group p-2 border-2  bg-white hover:bg-[#cbba9c] transition-all duration-200`}>
-        <img src={rightArrow} alt="next" className='h-7 group-hover:invert' />
+        <IoIosArrowForward className='text-2xl text-black group-hover:text-white' />
         </button>
       </div>
 

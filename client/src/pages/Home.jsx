@@ -1,9 +1,29 @@
 import { Link } from 'react-router-dom'
-import Card from '../components/Card'
+
 import Blog from '../components/Blog'
 import Footer from '../components/Footer'
+import BestSeller from '../components/BestSeller'
 
-import { home_watch, blogs } from '../constants/index'
+import { IoIosArrowRoundBack  } from "react-icons/io";
+import { MdArrowOutward } from "react-icons/md";
+
+const blogs = [
+  {
+      img: 'blog1.webp',
+      name: 'Titasnium Performance Watch',
+      desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever...'
+  },
+  {
+      img: 'blog2.webp',
+      name: 'Thw Perfect Man\'s Watch',
+      desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever...'
+  },
+  {
+      img: 'blog3.webp',
+      name: 'Creators of Man\'s Watch',
+      desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever...'
+  },
+]
 
 const Home = () => {
   return (
@@ -15,8 +35,6 @@ const Home = () => {
           <Link to={'/login'}><button className='w-1/3 py-2 border-[#CBBA9C] border-2 font-bold hover:bg-[#CBBA9C] text-white transition-all duration-500'>Get Started</button></Link>
         </div>
       </div>
-
-
 
       <div className='flex h-[80vh] font-manrope'>
         <div className='w-1/2 bg-[url("/img/bg2.jpg")] bg-cover bg-center flex flex-col gap-3 p-20 justify-end opacity-100  hover:opacity-95'>
@@ -45,26 +63,18 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='bg-[url("/img/bg6.png")] bg-cover text-center py-20 w-full'>
-        <div className='font-bold text-3xl font-manrope'>BEST SELLER</div>
-        <hr className='bg-[#CBBA9C] border-none w-1/12 h-[2px] mx-auto mt-2' />
-        <div className='flex flex-wrap gap-7 py-10 px-20'>
-          {home_watch.map((watch, index) => {
-            return <Card props={watch} key={index} />
-          })}
-        </div>
-      </div>
+      <BestSeller title="BEST SELLER" />
 
       <div className='flex h-[70vh]'>
         <div className='w-[42vw] flex flex-col gap-3 bg-[url("/img/img1.png")] bg-no-repeat bg-left-bottom py-32 px-12 pl-32 bg-[#dadcde]'>
           <div className='font-extrabold font-manrope text-4xl'>Professional and Luxury watches for everyone</div>
           <div>Time's influence extends beyond individual lives. It shapes the evolution of societies, cultures, and civilizations. It allows for progress, learning from the past, and envisioning a better future.</div>
-          <Link to={'/login'} ><div className='flex gap-3 items-center'><img src="/img/left-arrow.svg" alt="arrow" className='h-5' />View All Categories</div></Link>
+          <Link to={'/login'} ><div className='flex gap-3 items-center'><IoIosArrowRoundBack className='text-[25px]' />View All Categories</div></Link>
         </div>
         <div className='w-[58vw] bg-[url("/img/bg7.png")] flex gap-2 py-32 px-20 justify-end items-center'>
           <div>
             <Link to={'/login'} ><div className='bg-[#dadcde] p-3 rounded-full'>
-              <img src="/img/right-up-arrow.svg" alt="arrow" className='h-10' />
+              <MdArrowOutward className='text-3xl' />
             </div></Link>
           </div>
           <div className='text-white font-manrope w-1/2 flex flex-col gap-4'>

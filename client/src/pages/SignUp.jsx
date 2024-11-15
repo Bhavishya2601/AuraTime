@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
+import { useUser } from '../context/UserContext'
 
 
 const SignUp = () => {
@@ -10,6 +11,7 @@ const SignUp = () => {
   const [otp, setOtp] = useState('')
   const [countdown, setCountdown] = useState(30)
   const [isDisabled, setIsDisabled] = useState(true)
+  const {refreshUser} = useUser()
 
   const [formData, setFormData] = useState({
     fName: '',
@@ -78,6 +80,7 @@ const SignUp = () => {
       })
       if (result.data.success || result.status == 201) {
         toast.success('Account Created')
+        refreshUser()
         setTimeout(() => {
           navigate('/dashboard')
         }, 2000)

@@ -1,13 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import linkedin from '../assets/linkedin.svg'
-import arrow from '../assets/arrow.svg'
-import instagram from '../assets/instagram.svg'
-import mail from '../assets/mail.svg'
-import x from '../assets/x.svg'
-import youtube from '../assets/youtube.svg'
-import location from '../assets/location.svg'
-import whatsapp from '../assets/whatsapp.svg'
+
+import { FaWhatsapp, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaLocationDot, FaXTwitter } from "react-icons/fa6";
+import { SiGmail } from "react-icons/si";
+import { IoLogoYoutube, IoMdArrowDropright} from "react-icons/io";
 
 const Footer = () => {
   return (
@@ -20,27 +17,27 @@ const Footer = () => {
           <div className='flex gap-3 items-center'>
             <div>
               <a href="https://www.linkedin.com/in/bhavishya2601" target='_blank' >
-                <img src={linkedin} alt="linkedin" className="h-6 w-6 " />
+              <FaLinkedin className='text-[rgba(107,114,128,1)] text-2xl' />
               </a>
             </div>
             <div>
               <a href="https://x.com/bhavishya2601" target='_blank'>
-                <img src={x} alt="x" className="h-5 w-5" />
+              <FaXTwitter className='text-[rgba(107,114,128,1)] text-2xl' />
               </a>
             </div>
             <div>
               <a href="#">
-                <img src={youtube} alt="youtube" className="h-6 w-6" />
+              <IoLogoYoutube className='text-[rgba(107,114,128,1)] text-2xl' />
               </a>
             </div>
             <div>
               <a href="mailto:project.bhavishya2601@gmail.com">
-                <img src={mail} alt="Email" className="h-6 w-6" />
+              <SiGmail className='text-[rgba(107,114,128,1)] text-2xl' />
               </a>
             </div>
             <div>
               <a href="#">
-                <img src={instagram} alt="Instagram" className="h-6 w-6" />
+              <FaInstagram className='text-[rgba(107,114,128,1)] text-2xl' />
               </a>
             </div>
           </div>
@@ -50,15 +47,15 @@ const Footer = () => {
             <div className="text-white font-bold text-[22px]">Quick Links</div>
             <div className="flex flex-col gap-2 text-[17px]">
               <div className='flex gap-1 items-center'>
-                <img src={arrow} className="h-4" />
+                <IoMdArrowDropright className='text-[rgba(107,114,128,1)] text-2xl' />
                 <Link to={'/'}>Home</Link>
               </div>
               <div className='flex gap-1 items-center'>
-                <img src={arrow} className="h-4" />
+                <IoMdArrowDropright className='text-[rgba(107,114,128,1)] text-2xl' />
                 <Link to={'/about'}>About</Link>
               </div>
               <div className='flex gap-1 items-center'>
-                <img src={arrow} className="h-4" />
+                <IoMdArrowDropright className='text-[rgba(107,114,128,1)] text-2xl' />
                 <Link to={'/contact'}>Contact</Link>
               </div>
             </div>
@@ -68,15 +65,15 @@ const Footer = () => {
               <div className="text-[22px] font-bold text-white">Contact us</div>
               <div className="flex flex-col gap-3 text-[17px]">
                 <div className='flex gap-1 items-center'>
-                  <img src={whatsapp} className="h-6" />
+                  <FaWhatsapp className='text-[rgba(107,114,128,1)] text-2xl' />
                   <div>+91 9999999999</div>
                 </div>
                 <div className='flex gap-2 items-center'>
-                  <img src={location} className="h-6" />
+                  <FaLocationDot className='text-[rgba(107,114,128,1)] text-xl' />
                   <div>Chitkara University, Punjab</div>
                 </div>
                 <div className='flex gap-3 items-center'>
-                  <img src={mail} className="h-5" />
+                  <SiGmail className='text-[rgba(107,114,128,1)] text-xl' />
                   <div>bhavishyagarg2601@gmail.com</div>
                 </div>
               </div>

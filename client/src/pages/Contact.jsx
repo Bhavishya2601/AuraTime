@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import emailjs from 'emailjs-com'
 import toast from 'react-hot-toast'
 
-import x_black from '../assets/x-black.svg'
-import github_black from '../assets/github-black.svg'
-import linkedin_black from '../assets/linkedin-black.svg'
+import Footer from '../components/Footer';
+
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -64,13 +65,13 @@ const Contact = () => {
             <hr className='w-[15%] h-[1.5px] bg-[#CBBA9C]' />
             <div className='flex gap-5'>
               <a href='https://www.linkedin.com/in/bhavishya2601/' target='_blank' className='p-2 rounded-full border-2 border-slate-800'>
-                <img src={linkedin_black} alt="linkedin" className='h-6'/>
+                <FaLinkedin className='text-2xl'/>
               </a>
               <a href='https://www.github.com/bhavishya2601/' target='_blank' className='p-2 rounded-full border-2 border-slate-800'>
-                <img src={github_black} alt="github" className='h-6'/>
+                <FaGithub className='text-2xl'/>
               </a>
               <a href='https://www.x.com/bhavishya2601/' target='_blank' className='p-2 rounded-full border-2 border-slate-800'>
-                <img src={x_black} alt="x" className='h-6'/>
+                <FaXTwitter className='text-2xl'/>
               </a>
             </div>
           </div>
@@ -118,6 +119,7 @@ const Contact = () => {
         />
       </div>
       </form>
+      <Footer />
     </>
   )
 }

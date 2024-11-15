@@ -4,9 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useUser } from '../context/UserContext'
 
-import google from '../assets/google.svg'
-import github from '../assets/github.svg'
-import discord from '../assets/discord.svg'
+import { FaGoogle, FaGithub, FaDiscord } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -87,17 +85,17 @@ const Login = () => {
           <button
             className="flex justify-center items-center bg-transparent border-white border-2 shadow-md w-[70%] px-6 py-2 text-sm font-medium text-white hover:bg-[#f7f7f733]"
             onClick={handleGoogleLogin}>
-            <img src={google} alt="google" className="h-6 w-6 mr-2" />
+            <FaGoogle className='text-[24px] mr-2' />
             <span>Continue with Google</span>
           </button>
           <button type="button" className="py-2 px-4 flex justify-center items-center bg-transparent border-2 border-white hover:bg-[#f7f7f733]  text-white w-[70%] transition ease-in duration-300 text-center text-sm font-semibold" onClick={handleGithubLogin}>
-            <img src={github} alt="github" className="h-6 w-6 mr-2" />
+            <FaGithub className='text-[24px] mr-2' />
             Continue with GitHub
           </button>
           <button
             className="flex justify-center items-center py-2 text-sm bg-transparent border-2 border-white font-medium text-white hover:bg-[#f7f7f733] w-[70%]"
             onClick={handleDiscordLogin}>
-            <img src={discord} alt="discord" className="h-6 w-6 mr-2" />
+            <FaDiscord className='text-[24px] mr-2' />
             <span>Continue with Discord</span>
           </button>
         </div>

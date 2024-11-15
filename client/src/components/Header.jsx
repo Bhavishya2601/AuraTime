@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 
-import user from '../assets/user.svg'
-import cart from '../assets/cart.svg'
+import { FaUser } from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
 
 const Header = () => {
   const [dropdown, setDropdown] = useState(false)
@@ -53,7 +53,8 @@ const Header = () => {
             <>
               <div className='hover:text-[#DAC887]'><Link to={'/dashboard'}>SHOP</Link></div>
               <div className='relative' ref={dropdownRef}>
-                <img src={user} alt="user" className='h-6 cursor-pointer' onClick={toggleDropdown} />
+                {/* <img src={user} alt="user" className='h-6 cursor-pointer' onClick={toggleDropdown} /> */}
+                <FaUser className='text-xl cursor-pointer' onClick={toggleDropdown} />
                 {dropdown && (
                   <div className='absolute right-0 mt-3 w-36 bg-white text-black rounded-lg shadow-lg'>
                     <Link to='/profile' onClick={() => setDropdown(false)}>
@@ -70,7 +71,7 @@ const Header = () => {
                 )}
               </div>
               <div>
-                <img src={cart} alt="cart" className='h-6 cursor-pointer' />
+                <FaCartShopping className='text-xl cursor-pointer' />
               </div>
             </>
           }
