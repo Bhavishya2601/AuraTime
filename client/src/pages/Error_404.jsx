@@ -1,9 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Error_404 = () => {
   return (
-    <div className='flex items-center justify-center font-manrope text-5xl h-72'>
-      404 Page Not Found
+    <div className='flex flex-col gap-3 items-center justify-center font-wallpoet font-bold h-[calc(100vh-72px)] bg-black text-white'>
+      <div className='text-7xl'>404 Page Not Found</div>
+      <div className='text-xl'>Return to <Link to={'/'} className='font-bold'>Home</Link></div>
     </div>
   )
 }

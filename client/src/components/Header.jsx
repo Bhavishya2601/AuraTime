@@ -5,7 +5,7 @@ import { useUser } from '../context/UserContext'
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 
-const Header = () => {
+const Header = ({toggleCart}) => {
   const [dropdown, setDropdown] = useState(false)
   const { userData, isLoading } = useUser()
   const [userExist, setUserExist] = useState(false)
@@ -43,20 +43,22 @@ const Header = () => {
       <div>
         <img src="logo1.png" alt="AuraTime" className='h-10' />
       </div>
-      <div className={`flex gap-${userExist? '6' : '8'} font-semibold text-lg font-manrope items-center`}>
+      <div className={`flex gap-${userExist ? '6' : '8'} font-semibold text-lg font-manrope items-center`}>
         <div className='hover:text-[#CBBA9C]'><Link to={'/'}>HOME</Link></div>
         <div className='hover:text-[#DAC887]'><Link to={'/about'}>ABOUT</Link></div>
+        {userExist &&
+          <div className='hover:text-[#DAC887]'><Link to={'/dashboard'}>PRODUCTS</Link></div>
+        }
         <div className='hover:text-[#DAC887]'><Link to={'/contact'}>CONTACT</Link></div>
         <div className='flex gap-5 items-center'>
 
           {userExist &&
             <>
-              <div className='hover:text-[#DAC887]'><Link to={'/dashboard'}>SHOP</Link></div>
               <div className='relative' ref={dropdownRef}>
                 {/* <img src={user} alt="user" className='h-6 cursor-pointer' onClick={toggleDropdown} /> */}
                 <FaUser className='text-xl cursor-pointer' onClick={toggleDropdown} />
                 {dropdown && (
-                  <div className='absolute right-0 mt-3 w-36 bg-white text-black rounded-lg shadow-lg'>
+                  <div className='absolute right-0 mt-3 w-36 bg-white text-black rounded-lg shadow-lg z-10'>
                     <Link to='/profile' onClick={() => setDropdown(false)}>
                       <div className='px-4 py-2 hover:bg-gray-200 rounded-lg'>
                         Profile
@@ -71,7 +73,7 @@ const Header = () => {
                 )}
               </div>
               <div>
-                <FaCartShopping className='text-xl cursor-pointer' />
+                <FaCartShopping className='text-xl cursor-pointer' onClick={toggleCart}/>
               </div>
             </>
           }

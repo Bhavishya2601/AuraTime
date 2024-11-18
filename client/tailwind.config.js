@@ -8,7 +8,9 @@ export default {
     extend: {
       fontFamily: {
         manrope: ['Manrope', 'sans-serif'],
-        archivo: ["Archivo Black", 'sans-serif']
+        archivo: ["Archivo Black", 'sans-serif'],
+        cinzel : ["Cinzel Decorative", "serif"],
+        wallpoet:["Wallpoet", 'sans-serif']
       },
     },
   },

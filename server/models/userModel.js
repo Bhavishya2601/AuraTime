@@ -16,7 +16,7 @@ function generateOTP() {
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
-    port: 465,
+    port: 587,
     secure: false,
     auth: {
         user: process.env.EMAIL_USER,

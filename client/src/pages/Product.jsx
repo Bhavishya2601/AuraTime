@@ -4,6 +4,10 @@ import { useLocation, Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import BestSeller from '../components/BestSeller'
 
+import { FaPercent } from "react-icons/fa";
+import { IoIosCheckbox } from "react-icons/io";
+import { MdMiscellaneousServices } from "react-icons/md";
+
 const Product = () => {
     const [isVisible, setIsVisible] = useState(false)
     const location = useLocation()
@@ -15,16 +19,16 @@ const Product = () => {
         return name
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         })
     }, [location])
 
-    useEffect(()=>{
-        const handleScroll = () =>{
-            if (window.scrollY > 20){
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 100) {
                 setIsVisible(true)
             } else {
                 setIsVisible(false)
@@ -32,7 +36,7 @@ const Product = () => {
         }
 
         window.addEventListener('scroll', handleScroll)
-        return ()=>{
+        return () => {
             window.removeEventListener('scroll', handleScroll)
         }
     }, [])
@@ -85,7 +89,40 @@ const Product = () => {
                             </div>
                         </div>
                         <div>
-                        For more details on this product, please <Link to={'/contact'} className='underline'>contact us</Link>
+                            For more details on this product, please <Link to={'/contact'} className='underline'>contact us</Link>
+                        </div>
+                        <hr className='my-5 border-[1px]' />
+                        <div className='flex justify-between'>
+                            <div className='flex flex-col justify-center items-center w-1/3 border-r-2'>
+                                <div className='bg-[#cbba9c] rounded-full p-3 flex-none'>
+                                    <FaPercent className='text-white' />
+                                </div>
+                                <div className='text-sm'>Discount On</div>
+                                <div className='text-sm'>Prepaid Order</div>
+                            </div>
+                            <div className='flex flex-col justify-center items-center w-1/3 border-r-2'>
+                                <div className='bg-[#cbba9c] rounded-full p-3 flex-none'>
+                                    <IoIosCheckbox className='text-white text-xl' />
+                                </div>
+                                <div className='text-sm'>7 Day Returns</div>
+                                <div className='text-sm'>No Questions Asked</div>
+                            </div>
+                            <div className='flex flex-col justify-center items-center w-1/3 '>
+                                <div className='bg-[#cbba9c] rounded-full p-[6px] flex-none'>
+                                    <MdMiscellaneousServices className='text-white text-3xl' />
+                                </div>
+                                <div className='text-sm'>Servicing</div>
+                                <div className='text-sm'>Available</div>
+                            </div>
+                        </div>
+                        <div className='bg-[url(https://justintime.in/cdn/shop/files/Group_48246.svg?v=1727435443)] flex gap-5 px-10 py-5'>
+                            <div>
+                                <img src="https://justintime.in/cdn/shop/files/24_Months.png?v=1729243702" alt="Warranty" className='h-20' />
+                            </div>
+                            <div className='text-white flex flex-col font-serif justify-center text-2xl'>
+                                <div>24 Months</div>
+                                <div>Manufacturer Warranty</div>
+                            </div>
                         </div>
                     </div>
                 </div>
