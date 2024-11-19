@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
+import crypto from 'crypto-js'
 
 import Footer from '../components/Footer'
 import BestSeller from '../components/BestSeller'
+import { useUser } from '../context/UserContext'
 
 import { FaPercent } from "react-icons/fa";
 import { IoIosCheckbox } from "react-icons/io";
 import { MdMiscellaneousServices } from "react-icons/md";
 
-const Product = () => {
+const Product = ({toggleCart, updatedCartProduct}) => {
+    const {userData} = useUser()
+    const [cartProduct, setCartProduct] = useState([])
+    const [userkey, setUserkey] = useState(null)
     const [isVisible, setIsVisible] = useState(false)
     const location = useLocation()
     const { id, img, name, prev, price, gender, tags } = location.state
 
+    const userEmail = userData?.email
+
+    
     const truncate = (name) => {
         if (name.length > 30)
             return name.slice(0, 30) + '...'
@@ -25,7 +33,7 @@ const Product = () => {
             behavior: 'smooth'
         })
     }, [location])
-
+    
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 100) {
@@ -34,12 +42,50 @@ const Product = () => {
                 setIsVisible(false)
             }
         }
-
+        
         window.addEventListener('scroll', handleScroll)
         return () => {
             window.removeEventListener('scroll', handleScroll)
         }
     }, [])
+
+    const generateUniqueKey = (email) => {
+        if (email){
+            return crypto.MD5(email).toString()
+        }
+        return null
+    }
+
+    useEffect(()=>{
+        if (userEmail){
+            const key =generateUniqueKey(userEmail)
+            setUserkey(key)
+
+            const storedCart = JSON.parse(localStorage.getItem(`cart_${key}`)) || []
+            updatedCartProduct(storedCart)
+            setCartProduct(storedCart)
+        }
+    }, [userEmail])
+
+    const addToCart = () => {
+        const newItem = {
+            id, img, name, price, quantity : 1
+        }
+        const existingCart = [...cartProduct]
+        const productIndex = existingCart.findIndex(item => item.id === id)
+        if (productIndex !== -1){
+            existingCart[productIndex].quantity += 1;
+        } else {
+            existingCart.push(newItem)
+        }
+        console.log(existingCart)   
+        setCartProduct(existingCart)
+        if (userkey){
+            localStorage.setItem(`cart_${userkey}`, JSON.stringify(existingCart))
+        }
+        updatedCartProduct(existingCart)
+        toggleCart()
+    }
 
     return (
         <div className='relative'>
@@ -54,7 +100,8 @@ const Product = () => {
                         </div>
                     </div>
                     <div className='w-1/2 flex justify-end gap-3'>
-                        <button className='border-2 border-black font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200'>Add to Cart</button>
+                    
+                        <button className='border-2 border-black font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={addToCart}>Add to Cart</button>
                         <button className='border-2 border-black bg-black text-white font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200'>Buy it Now</button>
                     </div>
                 </div>
@@ -84,7 +131,7 @@ const Product = () => {
                         <div className='flex flex-col gap-2'>
                             <div className='text-gray-500 text-xs font-sans'>Inclusive of all taxes*</div>
                             <div className='flex gap-5'>
-                                <button className='border-2 border-black font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200'>Add to Cart</button>
+                                <button className='border-2 border-black font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={addToCart}>Add to Cart</button>
                                 <button className='border-2 border-black bg-black text-white font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200'>Buy it Now</button>
                             </div>
                         </div>

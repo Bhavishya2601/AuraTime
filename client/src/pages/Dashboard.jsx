@@ -10,7 +10,7 @@ import BestSeller from '../components/BestSeller'
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const Dashboard = () => {
+const Dashboard = ({watches}) => {
   const navigate = useNavigate()
   const { userData, isLoading } = useUser()
   const itemsPerPage = 12;
@@ -29,8 +29,7 @@ const Dashboard = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_WATCH_API}/api/v1/watch`)
-      setProducts(response.data)
+      setProducts(watches)
       setLoading(false)
     } catch (err) {
       console.log('Error fetching data')

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
 
 import { FaUser } from "react-icons/fa";
@@ -10,6 +10,8 @@ const Header = ({toggleCart}) => {
   const { userData, isLoading } = useUser()
   const [userExist, setUserExist] = useState(false)
   const dropdownRef = useRef(null)
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const toggleDropdown = () => {
     setDropdown(prev => !prev)
@@ -38,18 +40,20 @@ const Header = ({toggleCart}) => {
     }
   }, [dropdown])
 
+  const isActive = (path) => location.pathname === path ? 'text-[#DAC887]' : ''
+
   return (
     <div className={`flex w-full items-center justify-between ${userData ? 'px-32' : "px-48"} py-4 text-lg shadow-lg bg-black text-white`}>
       <div>
-        <img src="logo1.png" alt="AuraTime" className='h-10' />
+        <img src="logo1.png" alt="AuraTime" className='h-10 cursor-pointer' onClick={()=> navigate('/')} />
       </div>
       <div className={`flex gap-${userExist ? '6' : '8'} font-semibold text-lg font-manrope items-center`}>
-        <div className='hover:text-[#CBBA9C]'><Link to={'/'}>HOME</Link></div>
-        <div className='hover:text-[#DAC887]'><Link to={'/about'}>ABOUT</Link></div>
+        <div className={`hover:text-[#DAC887] ${isActive('/')}`}><Link to={'/'}>HOME</Link></div>
+        <div className={`hover:text-[#DAC887] ${isActive('/about')}`}><Link to={'/about'}>ABOUT</Link></div>
         {userExist &&
-          <div className='hover:text-[#DAC887]'><Link to={'/dashboard'}>PRODUCTS</Link></div>
+          <div className={`hover:text-[#DAC887] ${isActive('/dashboard')}`}><Link to={'/dashboard'}>PRODUCTS</Link></div>
         }
-        <div className='hover:text-[#DAC887]'><Link to={'/contact'}>CONTACT</Link></div>
+        <div className={`hover:text-[#DAC887] ${isActive('/contact')}`}><Link to={'/contact'}>CONTACT</Link></div>
         <div className='flex gap-5 items-center'>
 
           {userExist &&
