@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import toast from 'react-hot-toast'
+
 import { useUser } from '../context/UserContext'
 
 import { FaUser } from "react-icons/fa";
@@ -7,7 +10,7 @@ import { FaCartShopping } from "react-icons/fa6";
 
 const Header = ({toggleCart}) => {
   const [dropdown, setDropdown] = useState(false)
-  const { userData, isLoading } = useUser()
+  const { userData, setUserData, isLoading } = useUser()
   const [userExist, setUserExist] = useState(false)
   const dropdownRef = useRef(null)
   const location = useLocation()
@@ -42,6 +45,22 @@ const Header = ({toggleCart}) => {
 
   const isActive = (path) => location.pathname === path ? 'text-[#DAC887]' : ''
 
+  const handleLogout = async () => {
+    try{
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/logout`,{}, {
+        withCredentials: true
+      })
+      setUserExist(false)
+      setUserData({})
+      toast.success('Successfully Logged Out')
+    } catch (err){
+      // console.log(err.message)
+      toast.error('Something Went Wrong')
+    }
+    
+    setDropdown(false)
+  }
+
   return (
     <div className={`flex w-full items-center justify-between ${userData ? 'px-32' : "px-48"} py-4 text-lg shadow-lg bg-black text-white`}>
       <div>
@@ -68,7 +87,7 @@ const Header = ({toggleCart}) => {
                         Profile
                       </div>
                     </Link>
-                    <Link to='/logout' onClick={() => setDropdown(false)}>
+                    <Link to='/' onClick={handleLogout}>
                       <div className='px-4 py-2 rounded-lg hover:bg-gray-200 '>
                         Logout
                       </div>

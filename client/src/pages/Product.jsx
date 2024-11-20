@@ -78,7 +78,7 @@ const Product = ({toggleCart, updatedCartProduct}) => {
         } else {
             existingCart.push(newItem)
         }
-        console.log(existingCart)   
+        // console.log(existingCart)   
         setCartProduct(existingCart)
         if (userkey){
             localStorage.setItem(`cart_${userkey}`, JSON.stringify(existingCart))

@@ -31,13 +31,10 @@ const sendMail = (userData) =>{
     const { email, fName, lName } = userData
     const otp = generateOTP()
     const generateAt = Date.now()
-    console.log('OTP generated')
-    console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
 
     otpStore[email] = { otp, generateAt }
 
     const htmlContent = otpTemplate(otp, `${fName} ${lName}`)
-    console.log('mailOptions')
     const mailOptions = {
         from: process.env.EMAIL_PASS,
         to: email,
@@ -45,12 +42,9 @@ const sendMail = (userData) =>{
         html: htmlContent
     }
 
-    console.log('transporter')
-    console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email, otp)
     transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
             console.log(err)
-            console.log('error while sending otp')
             throw new Error('error while sending otp')
         }
         console.log('mail send')
@@ -79,19 +73,14 @@ const User = {
             console.log('User already exists')
             throw new Error('User Already Exists')
         } else {
-            console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER, email)
 
             return sendMail(userData)
-
-            // return email
         }
     },
 
     verifyOtp: async (userData) => { 
-        console.log('Entered verify')
         const { fName, lName, email, password, otp } = userData
         const currentTime = Date.now()
-        console.log('Found otp route')
 
         if (otpStore[email]) {
             const { otp: storeOTP, generateAt } = otpStore[email]
@@ -111,7 +100,6 @@ const User = {
 
                     return res.rows[0]
                 } catch (err) {
-                    console.log(err)
                     console.log('Error while inserting data into database', err.message)
                     throw new Error('Error while inserting data into Database')
                 }

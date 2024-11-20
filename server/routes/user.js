@@ -47,11 +47,27 @@ router.get('/profile', async (req, res)=>{
     const {id} = req.query
     try{
         const response = await db.query('SELECT * FROM users_account WHERE id=$1', [id])
-        console.log(response.rows)
+        // console.log(response.rows)
         return res.json(response.rows[0])
     } catch (err){
         console.log(err)
         res.status(404).json({error: 'profile data not fetched'})
+    }
+})
+
+router.post('/logout', (req, res)=>{
+    try{
+
+        res.cookie('jwt', '', {
+            httpOnly: true,
+            secure: true,
+            maxAge: 0,
+            sameSite: 'None'
+        })
+        res.status(200).json({message: 'Successfully Logged Out'})
+    } catch (err){
+        console.log(err.message)
+        res.status(404).json({error: 'Something Went Wrong'})
     }
 })
 

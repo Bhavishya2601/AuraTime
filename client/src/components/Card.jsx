@@ -1,7 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useUser } from '../context/UserContext'
 
 const Card = ({props}) => {
+  const {userData, isLoading} = useUser()
   const navigate = useNavigate()
   const truncate = (name) =>{
     if (name.length > 30) 
@@ -10,9 +12,13 @@ const Card = ({props}) => {
   }
 
   const handleClick = () => {
-    navigate('/product', {
-      state: props
-    })
+    if (!isLoading && Object.entries(userData).length === 0){
+      navigate('/login')
+    } else {
+      navigate('/product', {
+        state: props
+      })
+    }
   }
 
   return (

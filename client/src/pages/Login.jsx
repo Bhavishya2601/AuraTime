@@ -9,7 +9,7 @@ import { FaGoogle, FaGithub, FaDiscord } from "react-icons/fa";
 const Login = () => {
   const navigate = useNavigate()
 
-  const { userData, setIsLoggedIn } = useUser()
+  const { userData, setIsLoggedIn, refreshUser } = useUser()
   useEffect(() => {
     if (Object.entries(userData).length > 0) {
       navigate('/dashboard')
@@ -33,6 +33,7 @@ const Login = () => {
 
       toast.success('Login Successful')
       setIsLoggedIn(true)
+      refreshUser()
       setTimeout(() => {
         navigate('/dashboard')
       }, 2000)

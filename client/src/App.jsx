@@ -17,6 +17,7 @@ const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Product = lazy(() => import('./pages/Product'));
 const Error_404 = lazy(() => import('./pages/Error_404'));
+const CheckOut = lazy(() => import('./pages/CheckOut'))
 
 function App() {
   const [cart, setCart] = useState(false)
@@ -55,6 +56,7 @@ function App() {
               <Route path='/signup' element={<SignUp />} />
               <Route path='/dashboard' element={<Dashboard watches={watches}/>} />
               <Route path='/profile' element={<Profile />} />
+              <Route path='/checkout' element={<CheckOut />} />
               <Route path='/product' element={<Product toggleCart={toggleCart} updatedCartProduct={updatedCartProduct}/>} />
               <Route path='*' element={<Error_404 />} />
             </Routes>
