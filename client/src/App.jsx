@@ -56,7 +56,7 @@ function App() {
               <Route path='/signup' element={<SignUp />} />
               <Route path='/dashboard' element={<Dashboard watches={watches}/>} />
               <Route path='/profile' element={<Profile />} />
-              <Route path='/checkout' element={<CheckOut />} />
+              <Route path='/checkout' element={<CheckOut cartProduct={cartProduct} />} />
               <Route path='/product' element={<Product toggleCart={toggleCart} updatedCartProduct={updatedCartProduct}/>} />
               <Route path='*' element={<Error_404 />} />
             </Routes>
