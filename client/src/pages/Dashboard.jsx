@@ -10,7 +10,7 @@ import BestSeller from '../components/BestSeller'
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const Dashboard = ({watches}) => {
+const Dashboard = ({ watches }) => {
   const navigate = useNavigate()
   const { userData, isLoading } = useUser()
   const itemsPerPage = 12;
@@ -22,7 +22,8 @@ const Dashboard = ({watches}) => {
   useEffect(() => {
     if (!isLoading) {
       if (Object.entries(userData).length === 0) {
-        navigate('/login')
+        // navigate('/login')
+        alert('redirecting to login')
       }
     }
   }, [userData, isLoading])
@@ -50,14 +51,8 @@ const Dashboard = ({watches}) => {
 
   return (
     <div>
-      <div className='relative'>
-      <div className='bg-[url("https://catier-store-demo.myshopify.com/cdn/shop/files/bg_page.jpg?v=1704700451")] bg-cover bg-center h-60'></div>
-      <div className='absolute z-5 top-0 text-white flex flex-col gap-1 justify-center items-center h-full w-full font-manrope'>
-        <div className='text-4xl'>PRODUCTS</div>
-        <div className='text-lg'>
-          <Link to={'/'}>Home</Link> {'>'} Products
-        </div>
-      </div>
+      <div className='relative bg-[url("/img/bg8.jpg")] bg-center h-[50vh]'>
+        <div className='absolute text-white flex justify-center items-center h-full w-full text-5xl font-bold font-manrope'>Products</div>
       </div>
 
       <BestSeller title="TRENDING TODAY" />

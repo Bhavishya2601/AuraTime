@@ -23,8 +23,9 @@ router.post('/verify_otp', verify_otp)
 router.post('/resend-otp', otp_resend)
 
 router.get('/checkUser', (req, res)=>{
-    res.set('Cache-Control', 'no-store');
+    // res.set('Cache-Control', 'no-store');
     const token = req.cookies.jwt
+    console.log('token', token)
     if (!token){
         console.log('No user found')
         return res.status(401).json({message: 'UnAuthorized No token found'})

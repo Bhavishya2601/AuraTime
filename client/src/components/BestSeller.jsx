@@ -10,7 +10,7 @@ const BestSeller = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_WATCH_API}/api/v1/watch`)
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/watch`)
                 setProduct(response.data)
                 setLoading(false)
             } catch (err) {

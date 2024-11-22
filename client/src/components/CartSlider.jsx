@@ -46,6 +46,11 @@ const CartSlider = ({ data }) => {
     setCart(false)
   }
 
+  const handleToCheckout = () => {
+    navigate('/checkout')
+    setCart(false)
+  }
+
   const handleDeleteWatch = (id) => {
     
   }
@@ -76,7 +81,7 @@ const CartSlider = ({ data }) => {
           </div>
         </div> :
           <div className='flex flex-col justify-between h-[calc(100vh-48px)]'>
-            <div className='flex flex-col gap-2 p-3'>
+            <div className='flex flex-col gap-2 p-3 h-[calc(77vh)] overflow-y-auto'>
               {cartProduct.map((product) => {
                 return <div key={product.id} className='flex justify-between'>
                   <img src={product.img} alt={product.name} className='h-24 cursor-pointer' onClick={() => GotoProduct(product.id)} />
@@ -98,7 +103,7 @@ const CartSlider = ({ data }) => {
               </div>
               <div className='flex '>
                 <button className='w-1/2 h-16 bg-[#2A2A2A] text-white font-bold font-manrope uppercase text-lg hover:bg-[#DAC887] transition-all duration-500' onClick={handleToShop}>continue shopping</button>
-                <button className='w-1/2 h-16 bg-[#111111] text-white font-bold font-manrope uppercase text-lg tracking-widest hover:bg-[#DAC887] transition-all duration-500'>checkout</button>
+                <button className='w-1/2 h-16 bg-[#111111] text-white font-bold font-manrope uppercase text-lg tracking-widest hover:bg-[#DAC887] transition-all duration-500' onClick={handleToCheckout}>checkout</button>
               </div>
             </div>
           </div>

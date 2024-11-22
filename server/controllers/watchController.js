@@ -155,7 +155,7 @@ const watch = [
     {
         "id": 18,
         "name": "Seiko Presage Automatic with Enamel Dial and Stainless Steel Bracelet",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_29.jpg?v=1702265371",
+        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_18_9e6a8dca-d13f-4a18-92e3-33b52950a109.jpg?v=1702265381",
         "price": "$510.00",
         "prev": "",
         "gender": "Boy",
@@ -182,7 +182,7 @@ const watch = [
     {
         "id": 21,
         "name": "Zenith El Primero Chronomaster with High-Precision Movement",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_30.jpg?v=1702265363",
+        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_6_34f1d009-ec98-438c-9038-9c7c059726d5.jpg?v=1702265274",
         "price": "$1,100.00",
         "prev": "",
         "gender": "Girl",
@@ -200,7 +200,7 @@ const watch = [
     {
         "id": 23,
         "name": "IWC Big Pilot’s Watch with Large Dial and Black Leather Strap",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_17.jpg?v=1702265271",
+        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_5.jpg?v=1702265290",
         "price": "$1,040.00",
         "prev": "",
         "gender": "Girl",
@@ -209,7 +209,7 @@ const watch = [
     {
         "id": 24,
         "name": "Panerai Luminor Marina 44mm with Black Ceramic Case and Chronograph",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_31.jpg?v=1702265288",
+        "img": "https://fleir-store-demo.myshopify.com/cdn/shop/products/13.1.png?v=1662457622",
         "price": "$720.00",
         "prev": "",
         "gender": "Boy",
@@ -246,23 +246,6 @@ const watch = [
 
 
 
-
-
-
 export const getAllWatches = (req, res) => {
     res.json(watch)
-}
-
-export const addWatches = (req, res) =>{
-    const {name, img, price} = req.body
-    const lastWatch = watch[watch.length - 1];
-    const nextId = lastWatch ? lastWatch.id + 1 : 1;
-    const newWatch = {
-        id: nextId,
-        name,
-        img,
-        price
-    }
-    watch.push(newWatch)
-    res.status(201).json(newWatch)
 }

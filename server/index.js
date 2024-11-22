@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 
 import userRouter from './routes/user.js'
 import authRouter from './routes/auth.js'
+import apiRouter from './routes/watch.js'
 
 const app = express();
 const port = process.env.PORT
@@ -78,6 +79,7 @@ app.get('/', (req, res)=>{
 
 app.use('/api/v1/user', userRouter)
 app.use('/auth', authRouter)
+app.use('/watch', apiRouter)
 
 export {db}
 export default app;

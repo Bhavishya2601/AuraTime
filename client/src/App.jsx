@@ -34,7 +34,7 @@ function App() {
 
   useEffect(()=>{
     const fetchWatches = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_WATCH_API}/api/v1/watch`)
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/watch`)
       setWatches(response.data)
     }
 
