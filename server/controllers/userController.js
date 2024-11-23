@@ -26,13 +26,14 @@ export const signup = async (req, res)=>{
 
 export const verify_otp = async (req, res) =>{
     try{
-        const result = await User.verifyOtp(req.body)
+        const userData = req.body
+        const result = await User.verifyOtp(userData, req)
         const token = generateToken(result)
         res.cookie('jwt', token, {
             httpOnly: true,
             secure: true,
             maxAge: 24 * 60 * 60 * 1000,
-            sameSite: 'Strict'
+            sameSite: 'None'
         })
         res.status(201).json(result)
     } catch (err) {

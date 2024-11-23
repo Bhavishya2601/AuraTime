@@ -8,8 +8,6 @@ import bcrypt from 'bcrypt'
 import axios from 'axios'
 import express from 'express'
 import passport from 'passport';
-// import session from 'express-session';
-// import pgSession from 'connect-pg-simple'
 import { Strategy } from 'passport-local'
 import GoogleStrategy from 'passport-google-oauth2'
 import GithubStrategy from 'passport-github2'
@@ -69,7 +67,7 @@ router.get('/:provider/main', (req, res, next)=>{
             httpOnly: true,
             secure: true,
             maxAge: 24 * 60 * 60 * 1000,
-            sameSite: 'Lax' 
+            sameSite: 'None' 
         })
         return res.redirect(`${process.env.FRONTEND_URL}/dashboard`)
     })(req, res, next)

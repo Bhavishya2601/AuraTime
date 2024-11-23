@@ -5,6 +5,7 @@ import crypto from 'crypto-js'
 import Footer from '../components/Footer'
 import BestSeller from '../components/BestSeller'
 import { useUser } from '../context/UserContext'
+import ImageMagnifier from '../components/ImageMagnifier'
 
 import { FaPercent } from "react-icons/fa";
 import { IoIosCheckbox } from "react-icons/io";
@@ -109,7 +110,8 @@ const Product = ({toggleCart, updatedCartProduct}) => {
 
             <div className='m-10 flex font-manrope'>
                 <div className='w-1/2 flex justify-center'>
-                    <img src={img} alt="image" className='w-4/5' />
+                    {/* <img src={img} alt="image" className='w-4/5' /> */}
+                    <ImageMagnifier width="600px" src={img} />
                 </div>
                 <div className='w-1/2 px-8'>
                     <div className='flex flex-col px-5 gap-5'>

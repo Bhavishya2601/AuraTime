@@ -4,6 +4,7 @@ dotenv.config()
 import { db } from '../index.js'
 import bcrypt from 'bcrypt'
 import nodemailer from 'nodemailer'
+import { getLocation } from '../routes/location.js'
 
 import { otpTemplate } from '../mailTemplates/otpVerificationTemplate.js'
 
@@ -61,7 +62,8 @@ const User = {
                 lastname VARCHAR(50) NOT NULL,
                 email VARCHAR(100) NOT NULL UNIQUE,
                 password VARCHAR(200) NOT NULL,
-                login_method VARCHAR(20) NOT NULL
+                login_method VARCHAR(20) NOT NULL,
+                location VARCHAR(255)
                 );
         `)
         const { email, fName, lName } = userData
@@ -78,7 +80,7 @@ const User = {
         }
     },
 
-    verifyOtp: async (userData) => { 
+    verifyOtp: async (userData, req) => { 
         const { fName, lName, email, password, otp } = userData
         const currentTime = Date.now()
 
@@ -94,12 +96,18 @@ const User = {
                 console.log('verified successfully')
 
                 try {
+                    const ip =  req.headers['x-forwarded-for'] || req.connection.remoteAddress
+                    const {city, state, country} = getLocation(ip)
+                    const location = `${city}, ${state}, ${country}`
+
+
                     const hash = await bcrypt.hash(password, saltRounds)
 
-                    const res = await db.query('INSERT INTO users_account (firstname, lastname, email, password, login_method) VALUES($1, $2, $3, $4, $5) RETURNING *', [fName, lName, email, hash, "local"])
+                    const res = await db.query('INSERT INTO users_account (firstname, lastname, email, password, login_method, location) VALUES($1, $2, $3, $4, $5, $6) RETURNING *', [fName, lName, email, hash, "local", location])
 
                     return res.rows[0]
                 } catch (err) {
+                    console.log(err)
                     console.log('Error while inserting data into database', err.message)
                     throw new Error('Error while inserting data into Database')
                 }
