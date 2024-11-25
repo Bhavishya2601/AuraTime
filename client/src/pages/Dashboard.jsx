@@ -40,7 +40,7 @@ const Dashboard = ({ watches }) => {
 
   useEffect(() => {
     fetchProducts()
-  }, [])
+  }, [watches])
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
   const totalPages = Math.ceil(products.length / itemsPerPage)

@@ -82,7 +82,7 @@ const CheckOut = ({ cartProduct }) => {
             <div className='text-[#aaaaaa]'>All transactions are secure and encrypted.</div>
             <div className='h-32 bg-[#f6f6f6] flex flex-col gap-1 justify-center items-center'>
               <MdError className='text-[#aaaaaa] text-4xl' />
-              <div className='text-md text-[#aaaaaa]'>This store can't accept payments right now</div>
+              <div className='text-md text-[#aaaaaa]'>This store isn't accepting payments right now</div>
             </div>
             <button className='w-full py-3 text-lg border-2 rounded-lg cursor-not-allowed flex justify-center bg-[#f6f6f6] my-3'>Pay Now</button>
           </div>

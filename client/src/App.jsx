@@ -62,7 +62,7 @@ function App() {
             </Routes>
           </Suspense>
 
-          <CartSlider data={{cart, setCart, cartProduct, watches}}/>
+          <CartSlider data={{cart, setCart, cartProduct, watches, updatedCartProduct}}/>
         </BrowserRouter>
       </UserProvider>
     </>

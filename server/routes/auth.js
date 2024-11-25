@@ -13,8 +13,6 @@ import GoogleStrategy from 'passport-google-oauth2'
 import GithubStrategy from 'passport-github2'
 import DiscordStrategy from 'passport-discord'
 
-// const PgSession = pgSession(session)
-
 const generateToken = (user) => {
     return jwt.sign(
         { id: user.id, email: user.email },
@@ -77,64 +75,11 @@ router.get('/google', passport.authenticate("google", {
     scope: ['profile', 'email']
 }))
 
-// router.get('/google/main', (req, res, next)=>{
-//     passport.authenticate("google", (err, user, info)=>{
-//         if (err || !user){
-//             return res.redirect(`${process.env.FRONTEND_URL}/login`)
-//         }
-
-//         console.log(user)
-//         const token = generateToken(user)
-
-//         res.cookie('jwt', token, {
-//             httpOnly: true,
-//             secure: true,
-//             maxAge: 24 * 60 * 60 * 1000,
-//             sameSite: 'Lax'
-//         })
-
-//         return res.redirect(`${process.env.FRONTEND_URL}/dashboard`)
-//     })(req, res, next)
-// })
-
 router.get('/github', passport.authenticate('github', {
     scope: ['user:email']
 }))
 
-// router.get('/github/main', (req, res, next)=>{
-//     passport.authenticate("github", (err, user, info)=>{
-//         if (err || !user){
-//             return res.redirect(`${process.env.FRONTEND_URL}/login`)
-//         }
-//         const token = generateToken(user)
-
-//         res.cookie('jwt', token, {
-//             httpOnly: true,
-//             secure: true,
-//             maxAge: 24 * 60 * 60 * 1000,
-//             sameSite: 'Lax'
-//         })
-//         return res.redirect(`${process.env.FRONTEND_URL}/dashboard`)
-//     })(req, res, next)
-// })
-
 router.get('/discord', passport.authenticate('discord'))
-
-// router.get('/discord/main', (req, res, next)=>{
-//     passport.authenticate('discord', (err, user, info)=>{
-//         if (err || !user){
-//             res.redirect(`${process.env.FRONTEND_URL}/login`)
-//         }
-//         const token = generateToken(user)
-//         res.cookie('jwt', token, {
-//             httpOnly: true,
-//             secure: true,
-//             maxAge: 24 * 60 *60 * 1000,
-//             sameSite: 'Lax'
-//         })
-//         return res.redirect(`${process.env.FRONTEND_URL}/dashboard`)
-//     })(req, res, next)
-// })
 
 passport.use('local', new Strategy({ usernameField: 'email' }, async function verify(email, password, cb) {
 

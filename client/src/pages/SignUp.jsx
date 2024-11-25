@@ -121,6 +121,7 @@ const SignUp = () => {
     <>
       <form onSubmit={handleSubmit} className='relative h-[calc(100vh-72px)]'>
         <video
+          poster='img/bg9.jpg'
           src="img/bg-video.mp4"
           className='absolute h-full w-full object-cover filter'
           autoPlay
