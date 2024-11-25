@@ -4,7 +4,6 @@ dotenv.config()
 import { db } from '../index.js'
 import bcrypt from 'bcrypt'
 import nodemailer from 'nodemailer'
-import { getLocation } from '../routes/location.js'
 
 import { otpTemplate } from '../mailTemplates/otpVerificationTemplate.js'
 
@@ -80,7 +79,7 @@ const User = {
         }
     },
 
-    verifyOtp: async (userData, req) => { 
+    verifyOtp: async (userData) => { 
         const { fName, lName, email, password, otp } = userData
         const currentTime = Date.now()
 
@@ -96,14 +95,9 @@ const User = {
                 console.log('verified successfully')
 
                 try {
-                    const ip =  req.headers['x-forwarded-for'] || req.connection.remoteAddress
-                    const {city, state, country} = getLocation(ip)
-                    const location = `${city}, ${state}, ${country}`
-
-
                     const hash = await bcrypt.hash(password, saltRounds)
 
-                    const res = await db.query('INSERT INTO users_account (firstname, lastname, email, password, login_method, location) VALUES($1, $2, $3, $4, $5, $6) RETURNING *', [fName, lName, email, hash, "local", location])
+                    const res = await db.query('INSERT INTO users_account (firstname, lastname, email, password, login_method) VALUES($1, $2, $3, $4, $5) RETURNING *', [fName, lName, email, hash, "local"])
 
                     return res.rows[0]
                 } catch (err) {

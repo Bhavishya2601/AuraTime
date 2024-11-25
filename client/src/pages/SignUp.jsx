@@ -11,6 +11,7 @@ const SignUp = () => {
   const [otp, setOtp] = useState('')
   const [countdown, setCountdown] = useState(30)
   const [isDisabled, setIsDisabled] = useState(true)
+  const [handleSignupClick, setHandleSignupClick] = useState(false)
   const {refreshUser} = useUser()
 
   const [formData, setFormData] = useState({
@@ -56,6 +57,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setHandleSignupClick(true)
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/signup`, { email: formData.email, fName: formData.fName, lName: formData.lName })
       if (response.data.success || response.status == 201) {
@@ -88,6 +90,7 @@ const SignUp = () => {
     } catch (err) {
       toast.error('Something Went Wrong!!')
       setVerifyOTP(false)
+      setHandleSignupClick(false)
       setFormData({
         ...formData,
         password: ''
@@ -186,7 +189,7 @@ const SignUp = () => {
               </div>
             </div>
             <div className='w-1/2 py-2'>
-              <input type="submit" className='bg-[#f7f7f733] text-white w-full py-2 border-2 border-white cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' />
+              <input type="submit" className='bg-[#f7f7f733] text-white w-full py-2 border-2 border-white cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' disabled={handleSignupClick}/>
             </div>
             <div>
               Already have a Account?<Link to={'/login'} className=' font-bold'> Login</Link>
