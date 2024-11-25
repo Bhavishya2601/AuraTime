@@ -1,6 +1,7 @@
 import geoip from 'geoip-lite'
 
 export const getLocation = (ip) => {
+    geoip._init()
     const geo = geoip.lookup(ip)
     console.log('ip', ip)
     console.log('geo', geo)
