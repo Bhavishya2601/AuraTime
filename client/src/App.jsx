@@ -23,6 +23,11 @@ function App() {
   const [cart, setCart] = useState(false)
   const [cartProduct, setCartProduct] = useState([])
   const [watches, setWatches] = useState([])
+  const [userExistHeader, setUserExistHeader] = useState(false)
+
+  const updateHeaderUser = (data) => {
+    setUserExistHeader(data)
+  }
   
   const toggleCart = () =>{
     setCart(prev => !prev)
@@ -45,7 +50,7 @@ function App() {
     <>
       <UserProvider>
         <BrowserRouter>
-          <Header toggleCart={toggleCart}/>
+          <Header toggleCart={toggleCart} updateHeaderUser={updateHeaderUser} userExistHeader={userExistHeader}/>
           <Toaster />
           <Suspense fallback={<Loading />}>
             <Routes>
@@ -55,7 +60,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<SignUp />} />
               <Route path='/dashboard' element={<Dashboard watches={watches}/>} />
-              <Route path='/profile' element={<Profile />} />
+              <Route path='/profile' element={<Profile updateHeaderUser={updateHeaderUser} />} />
               <Route path='/checkout' element={<CheckOut cartProduct={cartProduct} />} />
               <Route path='/product' element={<Product toggleCart={toggleCart} updatedCartProduct={updatedCartProduct}/>} />
               <Route path='*' element={<Error_404 />} />

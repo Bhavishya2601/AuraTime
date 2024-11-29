@@ -121,7 +121,7 @@ const CheckOut = ({ cartProduct }) => {
         </div>
         <div className='flex justify-between pr-10'>
           <div className='font-bold text-lg'>Total</div>
-          <div className='font-bold text-lg'>{totalPrice + totalPrice/10}</div>
+          <div className='font-bold text-lg'>$ {totalPrice + totalPrice/10}</div>
         </div>
           </div>
       </div>

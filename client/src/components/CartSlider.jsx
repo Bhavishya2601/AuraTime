@@ -74,6 +74,7 @@ const CartSlider = ({ data }) => {
 
   const handleToCheckout = () => {
     navigate('/checkout')
+    updatedCartProduct(cartItems)
     setCart(false)
   }
 

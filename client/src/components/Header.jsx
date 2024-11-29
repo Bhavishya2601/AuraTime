@@ -8,10 +8,9 @@ import { useUser } from '../context/UserContext'
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 
-const Header = ({toggleCart}) => {
+const Header = ({toggleCart, userExistHeader: userExist, updateHeaderUser: setUserExist}) => {
   const [dropdown, setDropdown] = useState(false)
   const { userData, setUserData, isLoading } = useUser()
-  const [userExist, setUserExist] = useState(false)
   const dropdownRef = useRef(null)
   const location = useLocation()
   const navigate = useNavigate()
@@ -78,7 +77,6 @@ const Header = ({toggleCart}) => {
           {userExist &&
             <>
               <div className='relative' ref={dropdownRef}>
-                {/* <img src={user} alt="user" className='h-6 cursor-pointer' onClick={toggleDropdown} /> */}
                 <FaUser className='text-xl cursor-pointer' onClick={toggleDropdown} />
                 {dropdown && (
                   <div className='absolute right-0 mt-3 w-36 bg-white text-black rounded-lg shadow-lg z-10'>
