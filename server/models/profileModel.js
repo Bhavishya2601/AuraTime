@@ -1,12 +1,14 @@
 import { JSONCookie } from 'cookie-parser'
 import { db } from '../index.js'
 import bcrypt from 'bcrypt'
+import { passwordUpdated } from '../mailTemplates/passwordUpdateEmailTemplate.js'
+import mailSender from '../utils/mailSender.js'
 
 const saltRounds = parseInt(process.env.SALT_ROUNDS)
 
 const profile = {
     edit: async (userData) => {
-        const { email, password } = userData.data
+        const { email, password, firstname, lastname } = userData.data
         const { current: currentPass, new: newPass } = userData.pass
         try {
             const isMatch = await bcrypt.compare(currentPass, password)
@@ -18,6 +20,11 @@ const profile = {
 
             const hash = await bcrypt.hash(newPass, saltRounds)
             db.query('UPDATE users_account SET password = $1 WHERE email = $2', [hash, email])
+
+            const htmlContent = passwordUpdated(`${firstname} ${lastname}`, new Date())
+
+            const subject = 'Auratime - Your Password Has Been Successfully Updated'
+            mailSender(email, subject, htmlContent)
 
             return { success: true, message: 'Password Changed Successfully' }
         } catch (err) {
@@ -73,6 +80,18 @@ const profile = {
             throw new Error(err.message)
         }
 
+    },
+    upload : async (userData) => {
+        const {id, imgURL} = userData
+        try{
+            await db.query(
+                `UPDATE users_account SET profile_image_url = $1 WHERE id=$2`, [imgURL, id]
+            )
+            return {success: true, message: 'Profile image uploaded Successfully'}
+        } catch (err){
+            console.log(err.message)
+            throw new Error(err.message)
+        }
     }
 }
 

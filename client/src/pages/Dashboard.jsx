@@ -10,6 +10,7 @@ import BestSeller from '../components/BestSeller'
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
+
 const Dashboard = ({ watches }) => {
   const navigate = useNavigate()
   const { userData, isLoading } = useUser()
@@ -18,6 +19,12 @@ const Dashboard = ({ watches }) => {
   const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
+  
+  useEffect(() => {
+    window.scrollTo({
+        top: 0
+    })
+  }, [])
 
   useEffect(() => {
     if (!isLoading) {

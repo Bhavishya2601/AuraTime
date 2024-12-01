@@ -1,5 +1,5 @@
 import express from 'express'
-import {signup, verify_otp, otp_resend} from '../controllers/userController.js'
+import {signup, verify_otp, otp_resend, forgotPassword, ResetPassword} from '../controllers/userController.js'
 
 import { db } from '../index.js'
 import jwt from 'jsonwebtoken'
@@ -13,6 +13,8 @@ router.use(passport.session())
 router.post('/signup', signup)
 router.post('/verify_otp', verify_otp)
 router.post('/resend-otp', otp_resend)
+router.post('/forgotPassword', forgotPassword)
+router.post('/resetPassword', ResetPassword)
 
 router.get('/checkUser', (req, res)=>{
     const token = req.cookies.jwt

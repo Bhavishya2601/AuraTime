@@ -1,11 +1,16 @@
 import express from "express";
 import {db} from '../index.js'
-import {editProfile, deleteAccount} from '../controllers/profileController.js'
+import {editProfile, deleteAccount, imageUpload} from '../controllers/profileController.js'
+import multer from "multer";
 
 const router = express.Router()
 
+const storage = multer.memoryStorage()
+const upload = multer({storage : storage})
+
 router.post('/edit', editProfile)
 router.post('/delete', deleteAccount)
+router.post('/imgUpload', upload.single('image'), imageUpload)
 
 router.get('/data', async (req, res)=>{
     const {id} = req.query

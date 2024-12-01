@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useUser } from '../context/UserContext'
+import ForgotLogin from '../components/ForgotLogin'
 
 import { FaGoogle, FaGithub, FaDiscord } from "react-icons/fa";
 
@@ -22,6 +23,7 @@ const Login = () => {
   })
   const [passwordShown, setPasswordShown] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [forgotShown, setForgotShown] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -65,6 +67,10 @@ const Login = () => {
 
   const handleDiscordLogin = () => {
     window.location.href = `${import.meta.env.VITE_BACKEND_URL}/auth/discord`
+  }
+
+  const handleForgot = () => {
+    setForgotShown(true)
   }
 
   return (
@@ -147,14 +153,16 @@ const Login = () => {
                 <div>
                   <input type="submit" className='bg-[#f7f7f733] border-2 border-white text-white w-full py-2 cursor-pointer font-bold hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' value={loading ? "Logging in..." : "LOGIN"} />
                 </div>
-                <div>
+                <div className='flex justify-between'>
                   <Link to={'/signup'}>New User? <span className=' font-bold'> Create Account</span></Link>
+                  <div onClick={handleForgot} className='font-bold cursor-pointer'>Forgot Password</div>
                 </div>
               </div>
             </div>
           </form>
         </div>
       </div>
+      {forgotShown && <ForgotLogin setForgotShown={setForgotShown} /> }
     </div>
   )
 }

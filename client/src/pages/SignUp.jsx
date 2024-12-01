@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast, { Toaster } from 'react-hot-toast'
 import { useUser } from '../context/UserContext'
+import { RxCross1 } from "react-icons/rx";
 
 
 const SignUp = () => {
@@ -13,6 +14,7 @@ const SignUp = () => {
   const [isDisabled, setIsDisabled] = useState(true)
   const [handleSignupClick, setHandleSignupClick] = useState(false)
   const {refreshUser} = useUser()
+  const [otpSubmit, setOtpSubmit] = useState(false)
 
   const [formData, setFormData] = useState({
     fName: '',
@@ -70,11 +72,14 @@ const SignUp = () => {
       }
     } catch (err) {
       toast.error('Something Went Wrong!!', err.message)
+    } finally {
+      setHandleSignupClick(false)
     }
   }
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault()
+    setOtpSubmit(true)
     try {
 
       const result = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/verify_otp`, { ...formData, otp }, {
@@ -96,6 +101,8 @@ const SignUp = () => {
         password: ''
       })
       setOtp('')
+    } finally{
+      otpSubmit(false)
     }
   }
 
@@ -115,6 +122,14 @@ const SignUp = () => {
     } catch (err) {
       console.log('error fetching ',err.message)
     }
+  }
+
+  const handleClosePop = () => {
+    setVerifyOTP(false)
+    setHandleSignupClick(false)
+    setFormData({
+      ...formData, password: ''
+    })
   }
 
   return (
@@ -190,7 +205,7 @@ const SignUp = () => {
               </div>
             </div>
             <div className='w-1/2 py-2'>
-              <input type="submit" className='bg-[#f7f7f733] text-white w-full py-2 border-2 border-white cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' disabled={handleSignupClick}/>
+              <input type="submit" className='bg-[#f7f7f733] text-white w-full py-2 border-2 border-white cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' disabled={handleSignupClick} value={handleSignupClick ? "Submitting..." : "Submit"}/>
             </div>
             <div>
               Already have a Account?<Link to={'/login'} className=' font-bold'> Login</Link>
@@ -201,11 +216,12 @@ const SignUp = () => {
 
       {/* code for pop up */}
       <div id="popup" className={`${verifyOTP ? '' : 'hidden'} fixed top-0 left-0 w-full h-full z-1 font-manrope`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', transition: 'opacity 0.5s ease, visibility 0.5s ease' }}>
-        <div className='bg-transparent border-2 border-white text-white mx-auto my-[15%] p-5 border-1 w-[300px] text-center flex flex-col gap-4'>
+        <div className='relative bg-transparent border-2 border-white text-white mx-auto my-[15%] p-5 border-1 w-[300px] text-center flex flex-col gap-4'>
+        <RxCross1 className='absolute text-white text-xl top-1 right-1 cursor-pointer' onClick={handleClosePop} />
           <div className='font-semibold text-xl'>Verify OTP</div>
           <form onSubmit={handleOtpSubmit} className='flex flex-col gap-2'>
             <input type="text" name="otp" value={otp} onChange={handleOtpChange} className='border-2 bg-transparent py-1 px-2' placeholder='Enter OTP' />
-            <input type="submit" className='bg-[#f7f7f733] border-2 border-white text-white py-1 cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' />
+            <input type="submit" className={`bg-[#f7f7f733] border-2 border-white text-white py-1 cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider ${otpSubmit ? 'cursor-not-allowed' : ''}`} disabled={otpSubmit} value={otpSubmit ? "Submitting..." : "Submit"} />
           </form>
           <div className='w-full'>
             <button

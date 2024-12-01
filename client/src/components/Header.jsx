@@ -63,7 +63,7 @@ const Header = ({toggleCart, userExistHeader: userExist, updateHeaderUser: setUs
   return (
     <div className={`flex w-full items-center justify-between ${userData ? 'px-32' : "px-48"} py-4 text-lg shadow-lg bg-black text-white`}>
       <div>
-        <img src="logo1.png" alt="AuraTime" className='h-10 cursor-pointer' onClick={()=> navigate('/')} />
+        <img src="/logo1.png" alt="AuraTime" className='h-10 cursor-pointer' onClick={()=> navigate('/')} />
       </div>
       <div className={`flex gap-${userExist ? '6' : '8'} font-semibold text-lg font-manrope items-center`}>
         <div className={`hover:text-[#DAC887] ${isActive('/')}`}><Link to={'/'}>HOME</Link></div>

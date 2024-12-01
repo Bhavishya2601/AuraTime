@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useUser } from '../context/UserContext'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import Footer from '../components/Footer'
 
+import { GoPencil } from "react-icons/go";
+
 const Profile = ({ updateHeaderUser }) => {
   const navigate = useNavigate()
+  const fileInputRef = useRef(null)
   let { userData, setUserData, isLoading } = useUser()
   const [profileData, setProfileData] = useState(null)
   const [passData, setPassData] = useState({
@@ -14,9 +17,11 @@ const Profile = ({ updateHeaderUser }) => {
     new: '',
     retype: ''
   })
+  const [isUploading, SetIsUploading] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const [activeTab, setActiveTab] = useState('profile')
   const [lastWarn, setLastWarn] = useState(false)
+  const [isChanging, setIsChanging] = useState(false)
 
   const fetchUserData = async () => {
     try {
@@ -36,7 +41,7 @@ const Profile = ({ updateHeaderUser }) => {
     if (!isLoading && userData) {
       fetchUserData()
     }
-  }, [isLoading, userData])
+  }, [isLoading, userData, profileData])
 
   const handleChange = (e) => {
     setPassData({
@@ -45,23 +50,63 @@ const Profile = ({ updateHeaderUser }) => {
     })
   }
 
+  const handleImageChange = () => {
+    fileInputRef.current.click()
+  }
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const formData = new FormData()
+    formData.append('image', file)
+
+    for (const key in profileData) {
+      formData.append(key, profileData[key]);
+    }
+    SetIsUploading(true)
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/profile/imgUpload`,
+        formData,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      )
+      if (response.status === 200) {
+        toast.success('Profile Image Updated Successfully')
+        setProfileData({ ...profileData, profile_image_url: response.data.url })
+      }
+    } catch (err) {
+      console.log(err.message)
+      toast.error('Something Went Wrong')
+    } finally {
+      SetIsUploading(false)
+    }
+  }
+
   const handleEdit = async (e) => {
     e.preventDefault()
+    setIsChanging(false)
     if (passData.new !== passData.retype) {
       toast.error('Retyped password doesn\'t match.')
       return
     }
     try {
-      console.log(passData)
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/profile/edit`, {
         data: profileData,
         pass: passData
       })
       if (response.status === 200) {
+        setPassData({
+          current: '',
+          new: '',
+          retype: ''
+        })
         toast.success('Password changed Successfully')
       }
     } catch (err) {
-      toast.error(err.response.data.error)
+      toast.error(err.response?.data?.error || 'Something Went Wrong')
+    } finally{
+      isChanging(false)
     }
   }
 
@@ -91,8 +136,26 @@ const Profile = ({ updateHeaderUser }) => {
           <div className='flex flex-col gap-8'>
             <div className='flex flex-col items-center gap-3'>
               <div className='rounded-full'>
-
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThRGcLNaorK4esT7jd4P_MfhhrzowqyTHRqA8Ku2vZW7KNrswJYoA0CcmhlTTPsWSQZ5I&usqp=CAU" alt="" className='rounded-full h-40' />
+                <div className='relative w-40 h-40 rounded-full overflow-hidden group cursor-pointer' onClick={handleImageChange}>
+                  <img
+                    src={profileData.profile_image_url || `img/user.png`}
+                    alt="profile photo"
+                    className='w-full h-full rounded-full'
+                  />
+                  {isUploading &&
+                    <div className='absolute inset-0 bg-white z-20 flex justify-center items-center'>
+                      <img src="img/loader.gif" alt="loader" className='h-16' />
+                    </div>}
+                  <div className='absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300'></div>
+                  <div className='absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                    <GoPencil className='text-xl text-white' />
+                  </div>
+                </div>
+                <input type="file"
+                  className='hidden'
+                  ref={fileInputRef}
+                  onChange={handleFileUpload}
+                />
               </div>
               <div className='flex flex-col'>
                 <div className='text-2xl font-bold'>{profileData.firstname} {profileData.lastname}</div>
@@ -140,7 +203,7 @@ const Profile = ({ updateHeaderUser }) => {
                     className='py-2 px-3 w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8] transition-all duration-700'
                     placeholder='Current Password'
                     name='current'
-                    value={setPassData.current}
+                    value={passData.current}
                     onChange={handleChange}
                     required />
                   <input
@@ -148,15 +211,15 @@ const Profile = ({ updateHeaderUser }) => {
                     className='py-2 px-3 w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8] transition-all duration-700'
                     placeholder='New Password'
                     name='new'
-                    value={setPassData.new}
+                    value={passData.new}
                     onChange={handleChange}
                     required />
                   <input
                     type={`${showPass ? "text" : "password"}`}
-                    className='py-2 px-3 w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8]'
+                    className='py-2 px-3 w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8] transition-all duration-700'
                     placeholder='Retype Password'
                     name='retype'
-                    value={setPassData.retype}
+                    value={passData.retype}
                     onChange={handleChange}
                     required />
                   <div className='flex gap-2 items-center'>
@@ -166,7 +229,7 @@ const Profile = ({ updateHeaderUser }) => {
                       onChange={() => setShowPass(prev => !prev)} />
                     <div>Show Password</div>
                   </div>
-                  <input type="submit" className='bg-black text-white px-4 py-2 rounded-lg w-3/5 cursor-pointer hover:bg-slate-800 transition-all duration-300' value="Change Password" />
+                  <input type="submit" className='bg-black text-white px-4 py-2 rounded-lg w-3/5 cursor-pointer hover:bg-slate-800 transition-all duration-300' value="Change Password" disabled={isChanging} />
                 </form>
                 <div className='flex flex-col gap-3'>
                   <div className='text-2xl font-cinzel'>DELETE ACCOUNT</div>
@@ -185,7 +248,7 @@ const Profile = ({ updateHeaderUser }) => {
                   <div>This process is <span className='text-red-500 font-bold'>Irreversible</span></div>
                   <div className='flex gap-2 my-2'>
                     <button onClick={handleDelete} className='bg-red-600 text-white font-bold w-1/2 rounded-lg py-2 hover:bg-red-500 transition-all duration-300'>Delete</button>
-                    <button onClick={()=>setLastWarn(false)} className='w-1/2 bg-black text-white rounded-lg font-bold hover:bg-slate-800 transition-all duration-300'>Cancel</button>
+                    <button onClick={() => setLastWarn(false)} className='w-1/2 bg-black text-white rounded-lg font-bold hover:bg-slate-800 transition-all duration-300'>Cancel</button>
                   </div>
                 </div>
               </div>
