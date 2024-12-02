@@ -13,7 +13,7 @@ const SignUp = () => {
   const [countdown, setCountdown] = useState(30)
   const [isDisabled, setIsDisabled] = useState(true)
   const [handleSignupClick, setHandleSignupClick] = useState(false)
-  const {refreshUser} = useUser()
+  const { refreshUser } = useUser()
   const [otpSubmit, setOtpSubmit] = useState(false)
 
   const [formData, setFormData] = useState({
@@ -101,15 +101,15 @@ const SignUp = () => {
         password: ''
       })
       setOtp('')
-    } finally{
+    } finally {
       otpSubmit(false)
     }
   }
 
   const resendOTP = async () => {
-    try{
+    try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/resend-otp`, { email: formData.email, fName: formData.fName, lName: formData.lName })
-      if (response.status === 200){
+      if (response.status === 200) {
         setIsDisabled(true)
         setCountdown(30)
         toast.success('OTP send Successfully')
@@ -120,7 +120,7 @@ const SignUp = () => {
         }, 200);
       }
     } catch (err) {
-      console.log('error fetching ',err.message)
+      console.log('error fetching ', err.message)
     }
   }
 
@@ -146,11 +146,11 @@ const SignUp = () => {
         />
         <div className="absolute inset-0 bg-black opacity-60"></div>
 
-        <div className='relative flex flex-col justify-center px-60 gap-8 items-center py-10 font-manrope text-white h-full'>
-          <div className="text-4xl font-bold uppercase">Create New Account</div>
+        <div className='relative flex flex-col justify-center px-5 xxs:px-10 sm:px-20 lg:px-60 gap-8 items-center py-10 font-manrope text-white h-full'>
+          <div className="text-3xl xs:text-4xl font-bold uppercase">Create New Account</div>
 
           <div className='flex flex-col gap-4 w-full items-center'>
-            <div className='w-1/2'>
+            <div className='w-full sm:w-3/5 lg:w-2/3 xl:w-1/2'>
               <input
                 type="text"
                 name="fName"
@@ -160,7 +160,7 @@ const SignUp = () => {
                 placeholder='First Name'
                 required />
             </div>
-            <div className='w-1/2'>
+            <div className='w-full sm:w-3/5 lg:w-2/3 xl:w-1/2'>
               <input
                 type="text"
                 name='lName'
@@ -170,7 +170,7 @@ const SignUp = () => {
                 placeholder='Last Name'
                 required />
             </div>
-            <div className='w-1/2'>
+            <div className='w-full sm:w-3/5 lg:w-2/3 xl:w-1/2'>
               <input
                 type="email"
                 name='email'
@@ -180,7 +180,7 @@ const SignUp = () => {
                 placeholder='Email Address'
                 required />
             </div>
-            <div className='w-1/2'>
+            <div className='w-full sm:w-3/5 lg:w-2/3 xl:w-1/2'>
               <input
                 type={passwordShown ? 'text' : 'password'}
                 name='password'
@@ -192,7 +192,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className='flex flex-col w-full items-center'>
-            <div className='w-1/2'>
+            <div className='w-full sm:w-3/5 lg:w-2/3 xl:w-1/2'>
               <div className='flex gap-2 items-center'>
                 <input
                   type="checkbox"
@@ -204,8 +204,8 @@ const SignUp = () => {
                 <label htmlFor="password-checked">Show Password</label>
               </div>
             </div>
-            <div className='w-1/2 py-2'>
-              <input type="submit" className='bg-[#f7f7f733] text-white w-full py-2 border-2 border-white cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' disabled={handleSignupClick} value={handleSignupClick ? "Submitting..." : "Submit"}/>
+            <div className='w-full sm:w-3/5 lg:w-2/3 xl:w-1/2 py-2'>
+              <input type="submit" className='bg-[#f7f7f733] text-white w-full py-2 border-2 border-white cursor-pointer hover:bg-[#f7f7f743] duration-300 transition-all tracking-wider' disabled={handleSignupClick} value={handleSignupClick ? "Submitting..." : "Submit"} />
             </div>
             <div>
               Already have a Account?<Link to={'/login'} className=' font-bold'> Login</Link>
@@ -217,7 +217,7 @@ const SignUp = () => {
       {/* code for pop up */}
       <div id="popup" className={`${verifyOTP ? '' : 'hidden'} fixed top-0 left-0 w-full h-full z-1 font-manrope`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', transition: 'opacity 0.5s ease, visibility 0.5s ease' }}>
         <div className='relative bg-transparent border-2 border-white text-white mx-auto my-[15%] p-5 border-1 w-[300px] text-center flex flex-col gap-4'>
-        <RxCross1 className='absolute text-white text-xl top-1 right-1 cursor-pointer' onClick={handleClosePop} />
+          <RxCross1 className='absolute text-white text-xl top-1 right-1 cursor-pointer' onClick={handleClosePop} />
           <div className='font-semibold text-xl'>Verify OTP</div>
           <form onSubmit={handleOtpSubmit} className='flex flex-col gap-2'>
             <input type="text" name="otp" value={otp} onChange={handleOtpChange} className='border-2 bg-transparent py-1 px-2' placeholder='Enter OTP' />

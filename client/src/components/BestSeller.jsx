@@ -40,7 +40,7 @@ const BestSeller = (props) => {
             <div className='bg-[url("/img/bg6.png")] bg-cover text-center pt-20 pb-12 w-full'>
                 <div className='font-bold text-5xl font-cinzel'>{props.title}</div>
                 <hr className='bg-[#CBBA9C] border-none w-1/12 h-[2px] mx-auto mt-2' />
-                <div className='flex flex-wrap gap-7 py-10 px-20'>
+                <div className='flex flex-wrap gap-7 py-10 px-2 xl:px-20'>
                     {best.map((watch, index) => {
                         return <Card props={watch} key={index} />
                     })}

@@ -56,8 +56,8 @@
     DB_DATABASE = your_db_name
     DB_PORT = your_db_port
     SALT_ROUNDS = 10
-    EMAIL_USER = your_email_user
-    EMAIL_PASS = your_email_pass
+    EMAIL_USER = your_email_address
+    EMAIL_PASS = your_email_password
     PORT = 3000
     NODE_ENV = development
     SESSION_SECRET = your_session_secret
@@ -68,6 +68,9 @@
     GITHUB_CLIENT_SECRET = your_github_client_secret
     DISCORD_CLIENT_ID = your_discord_client_id
     DISCORD_CLIENT_SECRET = your_discord_client_secret
+    CLOUDINARY_CLOUD_NAME= your_cloudinary_cloud_name
+    CLOUDINARY_API_KEY= your_cloudinary_api_key
+    CLOUDINARY_API_SECRET= your_cloudinary_api_secret
    ```
 
 4. **Start Backend**:

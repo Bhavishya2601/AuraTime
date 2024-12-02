@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, useNavigate } from 'react-router-dom'
 import crypto from 'crypto-js'
 
 import Footer from '../components/Footer'
@@ -12,6 +12,7 @@ import { IoIosCheckbox } from "react-icons/io";
 import { MdMiscellaneousServices } from "react-icons/md";
 
 const Product = ({toggleCart, updatedCartProduct}) => {
+    const navigate = useNavigate()
     const {userData} = useUser()
     const [cartProduct, setCartProduct] = useState([])
     const [userkey, setUserkey] = useState(null)
@@ -88,6 +89,12 @@ const Product = ({toggleCart, updatedCartProduct}) => {
         toggleCart()
     }
 
+    const buyNow = () => {
+        addToCart()
+        toggleCart()
+        navigate('/checkout')
+    }
+
     return (
         <div className='relative'>
             <div className={`fixed w-full bottom-10 flex justify-center z-10 ${isVisible ? 'opacity-100' : 'opacity-0'} transition-all duration-300`}>
@@ -103,7 +110,7 @@ const Product = ({toggleCart, updatedCartProduct}) => {
                     <div className='w-1/2 flex justify-end gap-3'>
                     
                         <button className='border-2 border-black font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={addToCart}>Add to Cart</button>
-                        <button className='border-2 border-black bg-black text-white font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200'>Buy it Now</button>
+                        <button className='border-2 border-black bg-black text-white font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={buyNow}>Buy it Now</button>
                     </div>
                 </div>
             </div>
@@ -134,7 +141,7 @@ const Product = ({toggleCart, updatedCartProduct}) => {
                             <div className='text-gray-500 text-xs font-sans'>Inclusive of all taxes*</div>
                             <div className='flex gap-5'>
                                 <button className='border-2 border-black font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={addToCart}>Add to Cart</button>
-                                <button className='border-2 border-black bg-black text-white font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200'>Buy it Now</button>
+                                <button className='border-2 border-black bg-black text-white font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={buyNow}>Buy it Now</button>
                             </div>
                         </div>
                         <div>

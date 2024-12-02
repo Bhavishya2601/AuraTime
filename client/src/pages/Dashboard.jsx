@@ -29,8 +29,7 @@ const Dashboard = ({ watches }) => {
   useEffect(() => {
     if (!isLoading) {
       if (Object.entries(userData).length === 0) {
-        // navigate('/login')
-        alert('redirecting to login')
+        navigate('/login')
       }
     }
   }, [userData, isLoading])
