@@ -65,7 +65,7 @@ const Dashboard = ({ watches }) => {
 
       <hr className='h-[2px] bg-slate-200 mx-20' />
 
-      <div className='flex flex-wrap gap-7 py-10 px-20'>
+      <div className='flex flex-wrap gap-7 py-10 px-5 sm:px-10 lg:px-20'>
         {currentWatches.map((watch) => {
           return <Card props={watch} key={watch.id} />
         })}

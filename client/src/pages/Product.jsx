@@ -98,8 +98,8 @@ const Product = ({toggleCart, updatedCartProduct}) => {
     return (
         <div className='relative'>
             <div className={`fixed w-full bottom-10 flex justify-center z-10 ${isVisible ? 'opacity-100' : 'opacity-0'} transition-all duration-300`}>
-                <div className='flex justify-between bg-white w-4/5 items-center px-5 py-1 font-manrope border-2 shadow-2xl'>
-                    <div className='flex gap-6 items-center w-1/2'>
+                <div className='flex justify-between bg-white w-4/5 items-center px-2 xxs:px-5 py-1 font-manrope border-2 shadow-2xl'>
+                    <div className='hidden xl:flex gap-6 items-center w-1/2'>
                         <img src={img} alt="img" className='h-16' />
                         <div className='text-font text-xl'>{truncate(name)}</div>
                         <div className='flex flex-col gap-[2px]'>
@@ -107,21 +107,21 @@ const Product = ({toggleCart, updatedCartProduct}) => {
                             <div className='text-gray-500 text-sm font-sans'>inclusive of all taxes*</div>
                         </div>
                     </div>
-                    <div className='w-1/2 flex justify-end gap-3'>
+                    <div className='w-full xl:w-1/2 flex justify-end gap-3'>
                     
-                        <button className='border-2 border-black font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={addToCart}>Add to Cart</button>
-                        <button className='border-2 border-black bg-black text-white font-bold w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={buyNow}>Buy it Now</button>
+                        <button className='border-2 border-black font-bold w-1/2 xl:w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={addToCart}>Add to Cart</button>
+                        <button className='border-2 border-black bg-black text-white font-bold w-1/2 xl:w-2/5 py-2 hover:bg-[#cbba9c] hover:border-[#cbba9c] hover:text-white transition-all duration-200' onClick={buyNow}>Buy it Now</button>
                     </div>
                 </div>
             </div>
 
-            <div className='m-10 flex font-manrope'>
-                <div className='w-1/2 flex justify-center'>
+            <div className='mx-5 my-5 xl:m-10 flex flex-col gap-10 lg:gap-0 lg:flex-row font-manrope'>
+                <div className='w-full lg:w-1/2 flex justify-center'>
                     {/* <img src={img} alt="image" className='w-4/5' /> */}
                     <ImageMagnifier width="600px" src={img} />
                 </div>
-                <div className='w-1/2 px-8'>
-                    <div className='flex flex-col px-5 gap-5'>
+                <div className='w-full lg:w-1/2 px-0 sm:px-8'>
+                    <div className='flex flex-col px-0 xs:px-5 gap-5'>
                         <div className='flex flex-col gap-2'>
                             <div className='flex gap-3'>
                                 {tags.map((tag, index) => {
@@ -156,7 +156,7 @@ const Product = ({toggleCart, updatedCartProduct}) => {
                                 <div className='text-sm'>Discount On</div>
                                 <div className='text-sm'>Prepaid Order</div>
                             </div>
-                            <div className='flex flex-col justify-center items-center w-1/3 border-r-2'>
+                            <div className='flex flex-col justify-center items-center w-1/2 xs:w-1/3 border-r-2'>
                                 <div className='bg-[#cbba9c] rounded-full p-3 flex-none'>
                                     <IoIosCheckbox className='text-white text-xl' />
                                 </div>
@@ -175,7 +175,7 @@ const Product = ({toggleCart, updatedCartProduct}) => {
                             <div>
                                 <img src="https://justintime.in/cdn/shop/files/24_Months.png?v=1729243702" alt="Warranty" className='h-20' />
                             </div>
-                            <div className='text-white flex flex-col font-serif justify-center text-2xl'>
+                            <div className='text-white flex flex-col font-serif justify-center text-xl xs:text-2xl'>
                                 <div>24 Months</div>
                                 <div>Manufacturer Warranty</div>
                             </div>

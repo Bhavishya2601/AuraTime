@@ -132,7 +132,7 @@ const Profile = ({ updateHeaderUser }) => {
   return (
     <div>
       {profileData ?
-        <div className='h-[80vh] flex gap-40 font-cinzel py-20 px-48 bg-[#f8f8f8]'>
+        <div className='min-h-[600px] flex flex-col md:flex-row gap-5 md:gap-20 lg:gap-40 font-cinzel py-20 px-2 xxs:px-10 lg:px-20 xl:px-48 bg-[#f8f8f8]'>
           <div className='flex flex-col gap-8'>
             <div className='flex flex-col items-center gap-3'>
               <div className='rounded-full'>
@@ -168,39 +168,39 @@ const Profile = ({ updateHeaderUser }) => {
               <div className={`cursor-pointer ${activeTab === 'settings' ? 'font-bold' : ""}`} onClick={() => setActiveTab('settings')}>Settings</div>
             </div>
           </div>
-          <div className='font-semibold'>
+          <div className='font-semibold flex justify-center '>
             {activeTab === 'profile' && (
-              <div className='flex flex-col gap-3 text-2xl p-20'>
+              <div className='flex flex-col gap-3 xs:text-xl xl:text-2xl py-5 lg:p-10 xl:p-16'>
                 <div className='flex gap-5 items-center py-1'>
-                  <div>First Name : </div>
+                  <div>First Name</div>
                   <div className='font-manrope'>{profileData.firstname}</div>
                 </div>
                 <div className='flex gap-5 items-center py-1'>
-                  <div>Last Name : </div>
+                  <div>Last Name</div>
                   <div className='font-manrope'>{profileData.lastname}</div>
                 </div>
                 <div className='flex gap-5 items-center py-1'>
-                  <div>Email : </div>
-                  <div className='font-manrope'>{profileData.email}</div>
+                  <div>Email</div>
+                  <div className='font-manrope w-full break-all overflow-hidden text-ellipsis'>{profileData.email}</div>
                 </div>
                 <div className='flex gap-5 items-center py-1'>
-                  <div>City : </div>
+                  <div>City</div>
                   <div className='font-manrope text-[#6B7280]'>----</div>
                 </div>
                 <div className='flex gap-5 items-center py-1'>
-                  <div>State : </div>
+                  <div>State</div>
                   <div className='font-manrope text-[#6B7280]'>----</div>
                 </div>
               </div>
             )} {activeTab === 'orders' && (
               <div className='text-2xl p-20'>No Orders yet</div>
             )} {activeTab === 'settings' && (
-              <div className='flex flex-col gap-10 w-[50vw] px-20 py-8'>
+              <div className='flex flex-col  gap-10 w-full xs:w-4/5 md:w-[50vw] px-5 xs:px-10 lg:px-20 py-8'>
                 <form onSubmit={handleEdit} className='flex flex-col gap-3 font-manrope'>
                   <div className='text-2xl font-cinzel'>Change Password</div>
                   <input
                     type={`${showPass ? "text" : "password"}`}
-                    className='py-2 px-3 w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8] transition-all duration-700'
+                    className='py-2 px-3 w-full lg:w-4/5 xl:w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8] transition-all duration-700'
                     placeholder='Current Password'
                     name='current'
                     value={passData.current}
@@ -208,7 +208,7 @@ const Profile = ({ updateHeaderUser }) => {
                     required />
                   <input
                     type={`${showPass ? "text" : "password"}`}
-                    className='py-2 px-3 w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8] transition-all duration-700'
+                    className='py-2 px-3 w-full lg:w-4/5 xl:w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8] transition-all duration-700'
                     placeholder='New Password'
                     name='new'
                     value={passData.new}
@@ -216,7 +216,7 @@ const Profile = ({ updateHeaderUser }) => {
                     required />
                   <input
                     type={`${showPass ? "text" : "password"}`}
-                    className='py-2 px-3 w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8] transition-all duration-700'
+                    className='py-2 px-3 w-full lg:w-4/5 xl:w-3/5 outline-none rounded-lg border-2 focus:border-black bg-[#f8f8f8] transition-all duration-700'
                     placeholder='Retype Password'
                     name='retype'
                     value={passData.retype}
@@ -229,11 +229,11 @@ const Profile = ({ updateHeaderUser }) => {
                       onChange={() => setShowPass(prev => !prev)} />
                     <div>Show Password</div>
                   </div>
-                  <input type="submit" className='bg-black text-white px-4 py-2 rounded-lg w-3/5 cursor-pointer hover:bg-slate-800 transition-all duration-300' value="Change Password" disabled={isChanging} />
+                  <input type="submit" className='bg-black text-white px-4 py-2 rounded-lg w-full lg:w-4/5 xl:w-3/5 cursor-pointer hover:bg-slate-800 transition-all duration-300' value="Change Password" disabled={isChanging} />
                 </form>
                 <div className='flex flex-col gap-3'>
                   <div className='text-2xl font-cinzel'>DELETE ACCOUNT</div>
-                  <button onClick={() => setLastWarn(true)} className='w-3/5 bg-red-600 text-white rounded-lg font-manrope py-2 hover:bg-red-500 transition-all duration-30'>Delete Account</button>
+                  <button onClick={() => setLastWarn(true)} className='w-full lg:w-4/5 xl:w-3/5 bg-red-600 text-white rounded-lg font-manrope py-2 hover:bg-red-500 transition-all duration-30'>Delete Account</button>
                 </div>
               </div>
             )}

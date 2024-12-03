@@ -37,7 +37,7 @@ const ForgotLogin = ({setForgotShown}) => {
   return (
     <div>
       <div id="popup" className={` fixed top-0 left-0 w-full h-full z-1 font-manrope`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', transition: 'opacity 0.5s ease, visibility 0.5s ease' }}>
-        <div className='relative bg-transparent border-2 border-white text-white mx-auto my-[15%] p-5 border-1 w-[400px] text-center flex flex-col gap-6'>
+        <div className='relative bg-transparent border-2 border-white text-white mx-auto my-[40%] xs:my-[30%] lg:my-[15%] p-5 border-1 w-[300px] xs:w-[400px] text-center flex flex-col gap-6'>
         <RxCross1 className='absolute text-white text-xl top-1 right-1 cursor-pointer' onClick={handleClosePop} />
           <div className='font-semibold text-xl'>Forgot Password</div>
           <form onSubmit={handleForgetPass} className='flex flex-col gap-3'>

@@ -43,8 +43,8 @@ const CheckOut = ({ cartProduct }) => {
 
   return (
     <>
-      <div className='flex'>
-        <div className='w-[55vw] pl-44 py-10 pr-10 flex flex-col gap-6 font-manrope'>
+      <div className='flex lg:flex-row flex-col-reverse justify-center items-center lg:justify-between lg:items-stretch'>
+        <div className='w-full lg:w-[55vw] px-5 xs:pl-10 lg:pl-20 xl:pl-44 py-10 xs:pr-10 flex flex-col gap-6 font-manrope'>
           <div className='flex flex-col gap-3'>
             <div className='text-2xl'>Contact</div>
             <input type="text" className='px-4 py-2 w-full outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='Email or mobile phone Number' />
@@ -55,15 +55,15 @@ const CheckOut = ({ cartProduct }) => {
           </div>
           <div className='flex flex-col gap-3'>
             <div className='text-2xl'>Delivery</div>
-            <div className='flex gap-2'>
-              <input type="text" className='px-4 py-2 w-1/2 outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='First Name' />
-              <input type="text" className='px-4 py-2 w-1/2 outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='Last Name (optional)' />
+            <div className='flex flex-col xs:flex-row gap-2'>
+              <input type="text" className='px-4 py-2 w-full xs:w-1/2 outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='First Name' />
+              <input type="text" className='px-4 py-2 w-full xs:w-1/2 outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='Last Name (optional)' />
             </div>
             <input type="text" className='px-4 py-2 w-full outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='Address' />
             <input type="text" className='px-4 py-2 w-full outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='Apartment, suite, etc. (optional)' />
-            <div className='flex gap-2'>
-              <input type="text" className='px-4 py-2 w-1/2 outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='City' />
-              <input type="text" className='px-4 py-2 w-1/2 outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='Postal Code' />
+            <div className='flex flex-col xs:flex-row gap-2'>
+              <input type="text" className='px-4 py-2 w-full xs:w-1/2 outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='City' />
+              <input type="text" className='px-4 py-2 w-full xs:w-1/2 outline-none border-2 rounded-md focus:border-[#DAC887] transition-all duration-300' placeholder='Postal Code' />
             </div>
             <div className='flex gap-3'>
               <input type="checkbox" className='w-4 accent-black checked:ring-1 checked:ring-white' />
@@ -82,12 +82,12 @@ const CheckOut = ({ cartProduct }) => {
             <div className='text-[#aaaaaa]'>All transactions are secure and encrypted.</div>
             <div className='h-32 bg-[#f6f6f6] flex flex-col gap-1 justify-center items-center'>
               <MdError className='text-[#aaaaaa] text-4xl' />
-              <div className='text-md text-[#aaaaaa]'>This store isn't accepting payments right now</div>
+              <div className='text-md text-[#aaaaaa] text-center w-[90%]'>This store isn't accepting payments right now</div>
             </div>
             <button className='w-full py-3 text-lg border-2 rounded-lg cursor-not-allowed flex justify-center bg-[#f6f6f6] my-3'>Pay Now</button>
           </div>
         </div>
-        <div className='w-[45vw] bg-[#f6f6f6] pr-24 p-8 flex flex-col gap-5'>
+        <div className='w-full lg:w-[45vw] bg-[#f6f6f6] lg:pr-10 xl:pr-24 p-3 py-10 xs:p-8 flex flex-col gap-5'>
           <div className='flex flex-col gap-4 max-h-[65vh] overflow-y-auto pr-5'>
             {cartProduct.map((product) => {
               return (
@@ -95,7 +95,7 @@ const CheckOut = ({ cartProduct }) => {
                   <div className='flex gap-3 items-center'>
                     <img src={product.img} className='h-[75px] border-2 border-gray-200' />
                     <div className='flex flex-col gap-1'>
-                      <div className='text-[17px]'>{truncate(product.name)}</div>
+                      <div className='xs:text-[17px]'>{truncate(product.name)}</div>
                       <div className='text-sm'>QTY: {product.quantity}</div>
                     </div>
                   </div>
@@ -104,7 +104,7 @@ const CheckOut = ({ cartProduct }) => {
               )
             })}
           </div>
-          <div className='pr-10 flex flex-col gap-1'>
+          <div className='pr-5 xs:pr-10 flex flex-col gap-1'>
 
           <div className='flex justify-between'>
             <div>Subtotal ( {itemCount} items )</div>
@@ -119,7 +119,7 @@ const CheckOut = ({ cartProduct }) => {
             <div>$ {totalPrice/10}</div>
           </div>
         </div>
-        <div className='flex justify-between pr-10'>
+        <div className='flex justify-between pr-5 xs:pr-10'>
           <div className='font-bold text-lg'>Total</div>
           <div className='font-bold text-lg'>$ {totalPrice + totalPrice/10}</div>
         </div>

@@ -59,8 +59,8 @@ const ResetPassword = () => {
       />
     <div className="absolute inset-0 bg-black opacity-60"></div>
 
-      <div className="relative bg-transparent border-2 border-white text-white p-8 w-full max-w-md font-manrope">
-        <h2 className="text-2xl font-semibold text-center mb-6">Reset Your Password</h2>
+      <div className="relative bg-transparent border-2 border-white text-white py-4 px-3 xxs:p-8 w-full max-w-md font-manrope mx-5">
+        <h2 className="text-xl xxs:text-2xl font-semibold text-center mb-6">Reset Your Password</h2>
         <form onSubmit={handleResetPassword} className="flex flex-col gap-4">
           <div className="flex flex-col gap-3">
             <input

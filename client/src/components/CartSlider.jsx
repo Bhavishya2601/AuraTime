@@ -97,7 +97,7 @@ const CartSlider = ({ data }) => {
   return (
     <>
       <div
-        className={`top-0 right-0 h-full w-full xxs:w-3/4 sm:w-1/2 lg:w-[30%] bg-[#f8f8f8] fixed duration-500 transition-transform z-20 ${cart ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`top-0 right-0 h-full w-full xxs:w-3/4 sm:w-1/2 lg:w-[30%] bg-[#f8f8f8] fixed duration-500 transition-transform z-50 ${cart ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="font-manrope text-xl flex justify-between px-5 items-center font-bold h-12">
           <div>
