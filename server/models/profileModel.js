@@ -24,7 +24,7 @@ const profile = {
             const htmlContent = passwordUpdated(`${firstname} ${lastname}`, new Date())
 
             const subject = 'Auratime - Your Password Has Been Successfully Updated'
-            mailSender(email, subject, htmlContent)
+            await mailSender(email, subject, htmlContent)
 
             return { success: true, message: 'Password Changed Successfully' }
         } catch (err) {

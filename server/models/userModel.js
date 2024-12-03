@@ -19,7 +19,7 @@ function generateOTP() {
 
 let otpStore = {}
 
-const sendMail = (userData) => {
+const sendMail = async (userData) => {
 
     const { email, fName, lName } = userData
     const otp = generateOTP()
@@ -29,7 +29,12 @@ const sendMail = (userData) => {
 
     const subject = 'Auratime - Verify your email address'
     const htmlContent = otpTemplate(otp, `${fName} ${lName}`)
-    mailSender(email, subject, htmlContent)
+    try{
+        await mailSender(email, subject, htmlContent)
+    } catch (err){
+        console.log('error sending mail', err)
+        throw new Error('Error sending mail')
+    }
     return email
 }
 
@@ -129,7 +134,7 @@ const User = {
 
             const htmlContent = forgetPasswordTemplate(resetLink, `${userData.firstname} ${userData.lastname}`, new Date())
             const subject = 'Auratime - Password Reset Request'
-            mailSender(email, subject, htmlContent)
+            await mailSender(email, subject, htmlContent)
         } catch (err) {
             console.log('hello')
             console.log(err)

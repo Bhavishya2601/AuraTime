@@ -41,7 +41,7 @@ const Profile = ({ updateHeaderUser }) => {
     if (!isLoading && userData) {
       fetchUserData()
     }
-  }, [isLoading, userData, profileData])
+  }, [isLoading, userData])
 
   const handleChange = (e) => {
     setPassData({
@@ -80,6 +80,7 @@ const Profile = ({ updateHeaderUser }) => {
       toast.error('Something Went Wrong')
     } finally {
       SetIsUploading(false)
+      fetchUserData()
     }
   }
 
