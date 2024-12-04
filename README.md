@@ -47,31 +47,11 @@
    ```
 
 3. **Configure Backend Environment Variables**:
-   Create a `.env` file in the `server` directory:
-   ```env
-    FRONTEND_URL = http://localhost:5173
-    DB_USER = your_db_user
-    DB_HOST = your_db_host
-    DB_PASSWORD = your_db_password
-    DB_DATABASE = your_db_name
-    DB_PORT = your_db_port
-    SALT_ROUNDS = 10
-    EMAIL_USER = your_email_address
-    EMAIL_PASS = your_email_password
-    PORT = 3000
-    NODE_ENV = development
-    SESSION_SECRET = your_session_secret
-    JWT_SECRET = your_jwt_secret
-    GOOGLE_CLIENT_ID = your_google_client_id
-    GOOGLE_CLIENT_SECRET = your_google_client_secret
-    GITHUB_CLIENT_ID = your_github_client_id
-    GITHUB_CLIENT_SECRET = your_github_client_secret
-    DISCORD_CLIENT_ID = your_discord_client_id
-    DISCORD_CLIENT_SECRET = your_discord_client_secret
-    CLOUDINARY_CLOUD_NAME= your_cloudinary_cloud_name
-    CLOUDINARY_API_KEY= your_cloudinary_api_key
-    CLOUDINARY_API_SECRET= your_cloudinary_api_secret
-   ```
+   Copy the `.env.sample` file in the `server` directory and rename it to `.env`:
+     ```bash
+     cp .env.sample .env
+     ```
+   Open the `.env` file and fill in the required values.
 
 4. **Start Backend**:
    ```bash
@@ -89,22 +69,16 @@
    ```
 
 6. **Configure Frontend Environment Variables**:
-   Create a `.env` file in the `client` directory:
-   ```env
-    VITE_BACKEND_URL = http://localhost:3000
-    VITE_EMAILJS_SERVICE_ID = 
-    VITE_EMAILJS_TEMPLATE_ID = 
-    VITE_EMAILJS_USER_ID = 
-   ```
+   Copy the `.env.sample` file in the `client` directory and rename it to `.env`:
+     ```bash
+     cp .env.sample .env
+     ```
+   Open the `.env` file and fill in the required values.
 
 7. **Start Frontend**:
    ```bash
     npm run dev
    ```
-
-8. **Start the External API Service** (if applicable):
-   - Ensure the API service is running separately if it's not part of the server.
-   - Adjust the `VITE_API_URL` in the frontend `.env` file accordingly.
 
 ---
 
@@ -122,7 +96,7 @@ This ensures all components are properly configured and running!
    - Register with your email or use third-party providers.
    
 2. **Explore Products**:
-   - Browse and search for luxury watches.
+   - Browse for luxury watches.
    
 3. **Add to Cart**:
    - Add watches to your cart and view them at any time.
@@ -155,5 +129,4 @@ We welcome contributions! Follow these steps:
 For any questions or feedback, reach out via:
 
 - **Email**: bhavishya2601garg@gmail.com
-- **GitHub**: [YourUsername](https://github.com/bhavishya2601)
-
+- **GitHub**: [bhavishya2601](https://github.com/bhavishya2601)
