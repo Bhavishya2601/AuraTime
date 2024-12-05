@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const About = () => {
   return (
     <>
-      <div className='relative bg-[url("img/bg10.jpg")] bg-fixed bg-center h-screen'>
+      <div className='relative bg-[url("/img/bg10.jpg")] bg-fixed bg-center h-screen'>
         <div className='absolute text-white flex flex-col gap-6 justify-center items-center h-full w-full font-manrope'>
           <div className='text-6xl md:text-8xl font-black'>Our Story</div>
           <div className='sm:text-xl md:text-3xl'>Timeless craftsmanship meets modern innovation.</div>

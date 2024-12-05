@@ -133,7 +133,7 @@ const Profile = ({ updateHeaderUser }) => {
   return (
     <div>
       {profileData ?
-        <div className='min-h-[600px] flex flex-col md:flex-row gap-5 md:gap-20 lg:gap-40 font-cinzel py-20 px-2 xxs:px-10 lg:px-20 xl:px-48 bg-[#f8f8f8]'>
+        <div className='min-h-[600px] flex flex-col md:flex-row gap-5 md:gap-20 lg:gap-40 font-cinzel py-20 px-8 xxs:px-10 lg:px-20 xl:px-48 bg-[#f8f8f8]'>
           <div className='flex flex-col gap-8'>
             <div className='flex flex-col items-center gap-3'>
               <div className='rounded-full'>
