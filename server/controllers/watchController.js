@@ -2,7 +2,7 @@ const watch = [
     {
         "id": 1,
         "name": "Audemars Piguet Royal Oak Chronograph with Alligator Leather Strap",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_14.jpg?v=1702265283",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_28_x5qq0n.jpg",
         "price": "$560.00",
         "prev": "$530.00",
         "gender": "Girl",
@@ -11,7 +11,7 @@ const watch = [
     {
         "id": 2,
         "name": "Patek Philippe Calatrava 5196G with Gold Dial and Sapphire Crystal",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_24.jpg?v=1702265389",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_20_r8sejr.jpg",
         "price": "$780.00",
         "prev": "",
         "gender": "Boy",
@@ -20,7 +20,7 @@ const watch = [
     {
         "id": 3,
         "name": "Rolex Oyster Perpetual 36mm Classic Model with Steel Bracelet",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_28.jpg?v=1702265274",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_26_jqurij.jpg",
         "price": "$260.00",
         "prev": "$240.00",
         "gender": "Girl",
@@ -29,7 +29,7 @@ const watch = [
     {
         "id": 4,
         "name": "Jaeger-LeCoultre Master Control Date with Polished Stainless Steel Finish",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/files/product1_dcdbba4d-9d06-416c-892d-f1a387fc05ba.jpg?v=1702269072",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_21_xjd9pg.jpg",
         "price": "$860.00",
         "prev": "",
         "gender": "Boy",
@@ -38,7 +38,7 @@ const watch = [
     {
         "id": 5,
         "name": "Rolex Datejust 41mm with Roman Numeral Dial and Jubilee Band",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_10_69d8537b-bb10-458c-a347-33b936999d39.jpg?v=1702265364",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_1_djzwyw.jpg",
         "price": "$275.00",
         "prev": "",
         "gender": "Girl",
@@ -47,7 +47,7 @@ const watch = [
     {
         "id": 6,
         "name": "Omega Seamaster Diver 300M Professional with Co-Axial Master Chronometer",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_27.jpg?v=1702265279",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_27_dd2v4o.jpg",
         "price": "$550.00",
         "prev": "",
         "gender": "Boy",
@@ -56,7 +56,7 @@ const watch = [
     {
         "id": 7,
         "name": "Tudor Black Bay Fifty-Eight Inspired by Iconic Vintage Diving Watches",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_26_43877a91-2df2-4c5a-b93f-61a055f2f558.jpg?v=1702265374",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_22_u8cvb6.jpg",
         "price": "$970.00",
         "prev": "",
         "gender": "Girl",
@@ -65,7 +65,7 @@ const watch = [
     {
         "id": 8,
         "name": "Tag Heuer Monaco Calibre 11 with Automatic Movement and Sapphire Glass",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_13_1a5e8ccb-4511-4498-af56-ae3d7f671e61.jpg?v=1702265351",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676910/product_10_lqh2qq.jpg",
         "price": "$380.00",
         "prev": "$350.00",
         "gender": "Boy",
@@ -74,7 +74,7 @@ const watch = [
     {
         "id": 9,
         "name": "Hublot Classic Fusion Titanium with Matte Black Dial and Rubber Strap",
-        "img": "https://fleir-store-demo.myshopify.com/cdn/shop/products/12.1.png?v=1662457447",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676910/product_18_jl81sw.jpg",
         "price": "$670.00",
         "prev": "",
         "gender": "Girl",
@@ -83,7 +83,7 @@ const watch = [
     {
         "id": 10,
         "name": "Audemars Piguet Royal Oak Offshore Quartz for Bold Adventurous Wear",
-        "img": "https://fleir-store-demo.myshopify.com/cdn/shop/products/13.1.png?v=1662457622",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_5_eksvl4.jpg",
         "price": "$980.00",
         "prev": "$950.00",
         "gender": "Boy",
@@ -92,7 +92,7 @@ const watch = [
     {
         "id": 11,
         "name": "Omega Speedmaster Reduced with Iconic Tachymeter Bezel and Chronograph",
-        "img": "https://fleir-store-demo.myshopify.com/cdn/shop/products/15.1_fb02f304-59ad-4e64-b388-1c88592dd11f.png?v=1662457983",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_24_xer8ws.jpg",
         "price": "$890.00",
         "prev": "",
         "gender": "Girl",
@@ -101,7 +101,7 @@ const watch = [
     {
         "id": 12,
         "name": "IWC Pilot’s Watch Mark XVIII with Aviator Design and Durable Case",
-        "img": "https://dt-watches.myshopify.com/cdn/shop/products/product17_large.jpg?v=1532930073",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_2_wc3wm4.jpg",
         "price": "$789.00",
         "prev": "",
         "gender": "Boy",
@@ -110,7 +110,7 @@ const watch = [
     {
         "id": 13,
         "name": "Breitling Navitimer 8 Automatic 41 with Polished Bezel and Bold Look",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_1.jpg?v=1702265372",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_7_s9v3ah.jpg",
         "price": "$690.00",
         "prev": "",
         "gender": "Girl",
@@ -119,7 +119,7 @@ const watch = [
     {
         "id": 14,
         "name": "Tag Heuer Carrera 1887 with Chronograph and Automatic Movement",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_25.jpg?v=1702265289",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676910/product_26_1_y3keha.jpg",
         "price": "$810.00",
         "prev": "",
         "gender": "Boy",
@@ -128,7 +128,7 @@ const watch = [
     {
         "id": 15,
         "name": "Cartier Santos De Cartier with Square Case and Stainless Steel",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_12.jpg?v=1702265370",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_6_vg4vrh.jpg",
         "price": "$930.00",
         "prev": "",
         "gender": "Girl",
@@ -137,7 +137,7 @@ const watch = [
     {
         "id": 16,
         "name": "Breguet Classique 5177 with Elegant Blue Leather Strap and Date Display",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_16.jpg?v=1702265355",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_28_x5qq0n.jpg",
         "price": "$880.00",
         "prev": "",
         "gender": "Boy",
@@ -146,7 +146,7 @@ const watch = [
     {
         "id": 17,
         "name": "Hublot Big Bang Unico with Red Dial and Black Ceramic Bezel",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_22.jpg?v=1702265360",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_20_r8sejr.jpg",
         "price": "$760.00",
         "prev": "",
         "gender": "Girl",
@@ -155,7 +155,7 @@ const watch = [
     {
         "id": 18,
         "name": "Seiko Presage Automatic with Enamel Dial and Stainless Steel Bracelet",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_18_9e6a8dca-d13f-4a18-92e3-33b52950a109.jpg?v=1702265381",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_26_jqurij.jpg",
         "price": "$510.00",
         "prev": "",
         "gender": "Boy",
@@ -164,7 +164,7 @@ const watch = [
     {
         "id": 19,
         "name": "Rolex Submariner Date with Ceramic Bezel and Automatic Movement",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_11.jpg?v=1702265367",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_21_xjd9pg.jpg",
         "price": "$1,050.00",
         "prev": "",
         "gender": "Girl",
@@ -173,7 +173,7 @@ const watch = [
     {
         "id": 20,
         "name": "Tag Heuer Connected Modular 45 Smartwatch with Titanium Case",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_9.jpg?v=1702265359",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_1_djzwyw.jpg",
         "price": "$1,250.00",
         "prev": "",
         "gender": "Boy",
@@ -182,7 +182,7 @@ const watch = [
     {
         "id": 21,
         "name": "Zenith El Primero Chronomaster with High-Precision Movement",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_6_34f1d009-ec98-438c-9038-9c7c059726d5.jpg?v=1702265274",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_27_dd2v4o.jpg",
         "price": "$1,100.00",
         "prev": "",
         "gender": "Girl",
@@ -191,7 +191,7 @@ const watch = [
     {
         "id": 22,
         "name": "Rolex Day-Date 40mm with President Bracelet and 18ct Gold Case",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_23.jpg?v=1702265272",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_22_u8cvb6.jpg",
         "price": "$15,500.00",
         "prev": "",
         "gender": "Boy",
@@ -200,7 +200,7 @@ const watch = [
     {
         "id": 23,
         "name": "IWC Big Pilot’s Watch with Large Dial and Black Leather Strap",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_5.jpg?v=1702265290",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_5_eksvl4.jpg",
         "price": "$1,040.00",
         "prev": "",
         "gender": "Girl",
@@ -209,7 +209,7 @@ const watch = [
     {
         "id": 24,
         "name": "Panerai Luminor Marina 44mm with Black Ceramic Case and Chronograph",
-        "img": "https://fleir-store-demo.myshopify.com/cdn/shop/products/13.1.png?v=1662457622",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676910/product_26_1_y3keha.jpg",
         "price": "$720.00",
         "prev": "",
         "gender": "Boy",
@@ -218,7 +218,7 @@ const watch = [
     {
         "id": 25,
         "name": "Vacheron Constantin Patrimony with Elegant Rose Gold Case and White Dial",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_21.jpg?v=1702265375",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_7_s9v3ah.jpg",
         "price": "$2,600.00",
         "prev": "",
         "gender": "Girl",
@@ -227,7 +227,7 @@ const watch = [
     {
         "id": 26,
         "name": "Longines Master Collection with Moonphase and Stainless Steel Case",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_8.jpg?v=1702265358",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676910/product_10_lqh2qq.jpg",
         "price": "$680.00",
         "prev": "",
         "gender": "Boy",
@@ -236,7 +236,7 @@ const watch = [
     {
         "id": 27,
         "name": "A. Lange & Söhne Lange 1 with Iconic Balance Wheel and Sapphire Glass",
-        "img": "https://catier-store-demo.myshopify.com/cdn/shop/products/product_20.jpg?v=1702265353",
+        "img": "https://res.cloudinary.com/dxmowzzi3/image/upload/v1740676909/product_27_dd2v4o.jpg",
         "price": "$650.00",
         "prev": "",
         "gender": "Girl",
