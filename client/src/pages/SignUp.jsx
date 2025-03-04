@@ -102,7 +102,7 @@ const SignUp = () => {
       })
       setOtp('')
     } finally {
-      otpSubmit(false)
+      setOtpSubmit(false)
     }
   }
 
